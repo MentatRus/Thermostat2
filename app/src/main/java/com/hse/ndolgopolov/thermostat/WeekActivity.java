@@ -1,6 +1,5 @@
 package com.hse.ndolgopolov.thermostat;
 
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -12,16 +11,15 @@ import android.widget.TextView;
 
 import java.lang.reflect.Field;
 
-
-public class MainActivity extends ActionBarActivity {
-
-    double currentTemperature = 22.1;
-    double desiredTemperature = 23.0;
+/**
+ * Created by Igor on 28.05.2015.
+ */
+public class WeekActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.week_schedule_layout);
 
         init();
     }
@@ -30,19 +28,23 @@ public class MainActivity extends ActionBarActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        TextView currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
-        TextView currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
-        TextView targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
-        TextView schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
+        TextView dayTemp = (TextView) findViewById(R.id.dayTemperatureTextView);
+        TextView dayTempTitle = (TextView) findViewById(R.id.dayTitleTextView);
+        TextView nightTemp = (TextView) findViewById(R.id.nightTemperatureTextView);
+        TextView nightTempTitle = (TextView) findViewById(R.id.nightTitleTextView);
+        TextView temperatureTitle = (TextView) findViewById(R.id.temperatureTitleTextView);
+        TextView scheduleTitle = (TextView) findViewById(R.id.scheduleTitleTextView);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
 
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
         Typeface roboto_bold = Typeface.createFromAsset(this.getAssets(), "Roboto-Bold.ttf");
 
-        currTemp.setTypeface(roboto_light);
-        currTempLabel.setTypeface(roboto_light);
-        targetTemp.setTypeface(roboto_light);
-        schedule.setTypeface(roboto_light);
+        dayTemp.setTypeface(roboto_light);
+        dayTempTitle.setTypeface(roboto_light);
+        temperatureTitle.setTypeface(roboto_light);
+        scheduleTitle.setTypeface(roboto_light);
+        nightTemp.setTypeface(roboto_light);
+        nightTempTitle.setTypeface(roboto_light);
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
     }
@@ -51,7 +53,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_main, menu);
+        inflater.inflate(R.menu.menu_week_schedule, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -62,10 +64,14 @@ public class MainActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        // Calendar icon clicked
-        if (id == R.id.action_calendar) {
-            Intent intent = new Intent(this, WeekActivity.class);
-            startActivity(intent);
+        switch (id) {
+            case R.id.action_upload: {
+                break;
+            }
+
+            case R.id.action_save: {
+                break;
+            }
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <include
+            android:id="@+id/toolbar"
+            layout="@layout/toolbar"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Temperature"
+            android:textSize="50dp"
+            android:id="@+id/temperatureTitleTextView" android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"/>
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:layout_gravity="center_horizontal"
+            android:gravity="center_horizontal" android:layout_marginTop="10dp">
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageView" android:background="@drawable/ic_day" android:layout_marginTop="5dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Day: "
+                android:id="@+id/dayTitleTextView"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="25.5"
+                android:id="@+id/dayTemperatureTextView"/>
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:id="@+id/imageView2" android:background="@drawable/ic_night" android:layout_marginLeft="55dp"
+                android:layout_marginTop="5dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Night: "
+                android:id="@+id/nightTitleTextView"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="19.5"
+                android:id="@+id/nightTemperatureTextView"/>
+    </LinearLayout>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Schedule"
+            android:textSize="50dp"
+            android:id="@+id/scheduleTitleTextView" android:layout_gravity="center_horizontal"
+            android:layout_marginTop="50dp"/>
+    <ListView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/weekListView" android:layout_gravity="center_horizontal"/>
+
+</LinearLayout>
