@@ -7,7 +7,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.ListView;
 import android.widget.TextView;
+import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
 
 import java.lang.reflect.Field;
 
@@ -47,6 +49,10 @@ public class WeekActivity extends ActionBarActivity {
         nightTempTitle.setTypeface(roboto_light);
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
+
+        ListView listView = (ListView) findViewById(R.id.weekListView);
+        WeekAdapter adapter = new WeekAdapter(this);
+        listView.setAdapter(adapter);
     }
 
 
