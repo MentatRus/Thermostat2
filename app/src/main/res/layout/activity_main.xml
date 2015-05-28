@@ -1,0 +1,82 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity"
+    android:clickable="true">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="23.1"
+        android:id="@+id/currentTemperature"
+        android:layout_centerVertical="true"
+        android:textColor="#ff262699"
+        android:textStyle="italic"
+        android:textSize="200px"
+        android:fontFamily=""
+        android:singleLine="false" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_marginRight= "15dp"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+"
+            android:id="@+id/plusButton"
+            android:layout_above="@+id/desiredTemperature"
+            android:textColor="#ff262699"
+            android:textStyle="italic"
+            android:textSize="100px"
+            android:clickable="true"
+            android:onClick="clickPlus"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="22.0"
+            android:id="@+id/desiredTemperature"
+            android:layout_centerVertical="true"
+            android:textColor="#ff262699"
+            android:textStyle="italic"
+            android:textSize="100px"
+            android:fontFamily=""
+            android:singleLine="false"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:onClick="clickDesired"
+
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="-"
+            android:textColor="#ff262699"
+            android:textStyle="italic"
+            android:textSize="100px"
+            android:id="@+id/minusButton"
+            android:layout_alignBottom="@+id/currentTemperature"
+            android:layout_alignRight="@+id/desiredTemperature"
+            android:layout_alignEnd="@+id/desiredTemperature"
+            android:clickable="true"
+            android:onClick="clickMinus"
+            />
+    </LinearLayout>
+
+
+
+
+</RelativeLayout>
