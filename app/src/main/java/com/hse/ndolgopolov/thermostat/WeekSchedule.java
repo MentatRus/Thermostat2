@@ -6,8 +6,8 @@ import java.util.*;
  * Created by Nickolay Dolgopolov on 28.05.2015.
  */
 public class WeekSchedule {
-    public double highTemperature;
-    public double lowTemperature;
+    public double highTemperature = 23;
+    public double lowTemperature = 18;
     DaySchedule[] days = new DaySchedule[7];
 
     public WeekSchedule() {

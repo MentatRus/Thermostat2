@@ -5,6 +5,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,6 +17,8 @@ import com.hse.ndolgopolov.thermostat.Controller;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -24,6 +27,7 @@ public class MainActivity extends ActionBarActivity {
     TextView currTempLabel;
     TextView targetTemp;
     TextView schedule;
+    TextView fakeDate;
     Controller controller = new Controller(this);
     private boolean locked = false;
 
@@ -33,7 +37,7 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         init();
-        controller.start();
+        //controller.start();
     }
 
     private void init() {
@@ -44,6 +48,7 @@ public class MainActivity extends ActionBarActivity {
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
         targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
         schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
+        fakeDate = (TextView)findViewById(R.id.fakeDate);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
 
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
@@ -60,16 +65,38 @@ public class MainActivity extends ActionBarActivity {
         lockImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (locked) {
+                if (controller.isPermanentlyOverriden) {
                     v.setBackgroundResource(R.drawable.ic_lock_open);
+                    controller.isPermanentlyOverriden = false;
                 } else {
                     v.setBackgroundResource(R.drawable.ic_lock_closed);
+                    controller.isPermanentlyOverriden = true;
                 }
 
-                locked = !locked;
             }
         });
         updateFromController();
+        final int minuteLength = 60000 / controller.timeScale;
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                boolean c = true;
+                while (c) {
+                    try {
+                        Thread.sleep(minuteLength);
+                        controller.fakeDate.add(Calendar.MINUTE, 1);
+
+                        controller.setDesiredTemperature();
+                        controller.setCurrentTemperature();
+                        updateFromController();
+                        Log.i("Update", "Called");
+                    } catch (InterruptedException ex) {
+                        c = false;//Убери, если будет вылетать
+                    }
+                }
+
+            }
+        }).start();
     }
 
 
@@ -119,7 +146,30 @@ public class MainActivity extends ActionBarActivity {
         return titleTextView;
     }
     public void updateFromController(){
-        currTemp.setText(String.format("%.1f",controller.currentTemperature));
-        targetTemp.setText(String.format("%.1f",controller.desiredTemperature));
+        currTemp.post(new Runnable() {
+            @Override
+            public void run() {
+                currTemp.setText(String.format("%.1f", controller.currentTemperature));
+            }
+        });
+        targetTemp.post(new Runnable() {
+            @Override
+            public void run() {
+                targetTemp.setText(String.format("%.1f", controller.desiredTemperature));
+            }
+        });
+        //targetTemp.setText(String.format("%.1f",controller.desiredTemperature));
+        //SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+        //fakeDate.setText(dateFormat.format(controller.fakeDate));
+        fakeDate.post(new Runnable() {
+            @Override
+            public void run() {
+                fakeDate.setText(controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+            }
+        });
+        //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
+        Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
     }
 }
+
+

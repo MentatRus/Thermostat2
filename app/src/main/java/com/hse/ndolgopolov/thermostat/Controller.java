@@ -1,6 +1,7 @@
 package com.hse.ndolgopolov.thermostat;
 
 import android.app.Activity;
+import android.util.Log;
 
 import com.hse.ndolgopolov.thermostat.Activity.MainActivity;
 
@@ -20,7 +21,7 @@ public class Controller {
     public double desiredTemperature = 23;
     public double currentTemperature = 22;
     public double temperatureChangeSpeed = 0.1;
-    Calendar fakeDate;
+    public Calendar fakeDate;
     MainActivity mainActivity;
     public Controller(MainActivity activity) {
         weekSchedule = new WeekSchedule();
@@ -53,26 +54,7 @@ public class Controller {
         if (currentTemperature > desiredTemperature) currentTemperature -= temperatureChangeSpeed;
     }
 
-    public void start() {
 
-        final int minuteLength = 60000 / timeScale;
-        Thread thread = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                boolean c = true;
-                while (c) {
-                    try {
-                        Thread.sleep(minuteLength);
-                        setDesiredTemperature();
-                        setCurrentTemperature();
-                        mainActivity.updateFromController();
-                    } catch (InterruptedException ex) {
-                        c = false;//Убери, если будет вылетать
-                    }
-                }
-            }
-        });
-    }
 
 
 }
