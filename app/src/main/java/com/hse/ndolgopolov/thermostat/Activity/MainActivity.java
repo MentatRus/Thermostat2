@@ -11,6 +11,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.hse.ndolgopolov.thermostat.Controller;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
@@ -18,9 +20,11 @@ import java.lang.reflect.Field;
 
 public class MainActivity extends ActionBarActivity {
 
-    double currentTemperature = 22.1;
-    double desiredTemperature = 23.0;
-
+    TextView currTemp;
+    TextView currTempLabel;
+    TextView targetTemp;
+    TextView schedule;
+    Controller controller = new Controller(this);
     private boolean locked = false;
 
     @Override
@@ -29,16 +33,17 @@ public class MainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main);
 
         init();
+        controller.start();
     }
 
     private void init() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        TextView currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
-        TextView currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
-        TextView targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
-        TextView schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
+        currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
+        currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
+        targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
+        schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
 
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
@@ -64,6 +69,7 @@ public class MainActivity extends ActionBarActivity {
                 locked = !locked;
             }
         });
+        updateFromController();
     }
 
 
@@ -89,6 +95,16 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    public void clickPlus(View V){
+        controller.desiredTemperature += 0.1;
+        controller.isOverriden = true;
+        updateFromController();
+    }
+    public void clickMinus(View V){
+        controller.desiredTemperature -= 0.1;
+        controller.isOverriden = true;
+        updateFromController();
+    }
 
     private TextView getActionBarTextView(Toolbar toolbar) {
         TextView titleTextView = null;
@@ -101,5 +117,9 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return titleTextView;
+    }
+    public void updateFromController(){
+        currTemp.setText(String.format("%.1f",controller.currentTemperature));
+        targetTemp.setText(String.format("%.1f",controller.desiredTemperature));
     }
 }

@@ -1,5 +1,9 @@
 package com.hse.ndolgopolov.thermostat;
 
+import android.app.Activity;
+
+import com.hse.ndolgopolov.thermostat.Activity.MainActivity;
+
 import java.util.Calendar;
 
 /**
@@ -8,22 +12,23 @@ import java.util.Calendar;
 
 //Класс, который лежит в каждой форме. Доступ к расписаниям и прочему - через него
 public class Controller {
-    boolean isOverriden = false;
-    boolean isPermanentlyOverriden = false;
-    boolean isDay = false;
-    int timeScale = 100;
-    WeekSchedule weekSchedule;
-    double desiredTemperature = 23;
-    double currentTemperature = 22;
-    double temperatureChangeSpeed = 0.1;
+    public boolean isOverriden = false;
+    public boolean isPermanentlyOverriden = false;
+    public boolean isDay = false;
+    public int timeScale = 100;
+    public WeekSchedule weekSchedule;
+    public double desiredTemperature = 23;
+    public double currentTemperature = 22;
+    public double temperatureChangeSpeed = 0.1;
     Calendar fakeDate;
-
-    Controller() {
+    MainActivity mainActivity;
+    public Controller(MainActivity activity) {
         weekSchedule = new WeekSchedule();
         fakeDate = Calendar.getInstance();
+        mainActivity = activity;
     }
 
-    void setDesiredTemperature() {
+    public void setDesiredTemperature() {
         double scheduleTemperature;
         if (weekSchedule.isHighTemperature(fakeDate))
             scheduleTemperature = weekSchedule.highTemperature;
@@ -43,12 +48,13 @@ public class Controller {
 
     }
 
-    void setCurrentTemperature() {
+    public void setCurrentTemperature() {
         if (currentTemperature < desiredTemperature) currentTemperature += temperatureChangeSpeed;
         if (currentTemperature > desiredTemperature) currentTemperature -= temperatureChangeSpeed;
     }
 
-    void start() {
+    public void start() {
+
         final int minuteLength = 60000 / timeScale;
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -59,6 +65,7 @@ public class Controller {
                         Thread.sleep(minuteLength);
                         setDesiredTemperature();
                         setCurrentTemperature();
+                        mainActivity.updateFromController();
                     } catch (InterruptedException ex) {
                         c = false;//Убери, если будет вылетать
                     }
