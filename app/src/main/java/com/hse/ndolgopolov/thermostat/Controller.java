@@ -8,6 +8,9 @@ import java.util.Calendar;
 
 // ласс, который лежит в каждой форме. ƒоступ к расписани€м и прочему - через него
 public class Controller {
+    boolean isOverriden = false;
+    boolean isPermanentlyOverriden = false;
+    boolean isDay = false;
     int timeScale = 100;
     WeekSchedule weekSchedule;
     double desiredTemperature = 23;
@@ -21,9 +24,23 @@ public class Controller {
     }
 
     void setDesiredTemperature() {
+        double scheduleTemperature;
         if (weekSchedule.isHighTemperature(fakeDate))
-            desiredTemperature = weekSchedule.highTemperature;
-        else desiredTemperature = weekSchedule.lowTemperature;
+            scheduleTemperature = weekSchedule.highTemperature;
+        else scheduleTemperature = weekSchedule.lowTemperature;
+        if(!isOverriden){
+            desiredTemperature = scheduleTemperature;
+            return;
+        }
+        if(isOverriden && !isPermanentlyOverriden){
+            if(weekSchedule.isHighTemperature(fakeDate) != isDay){
+                isDay = weekSchedule.isHighTemperature(fakeDate);
+                desiredTemperature =scheduleTemperature;
+                isOverriden = false;
+            }
+            return;
+        }
+
     }
 
     void setCurrentTemperature() {
