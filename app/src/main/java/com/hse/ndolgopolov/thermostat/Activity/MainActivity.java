@@ -1,5 +1,6 @@
-package com.hse.ndolgopolov.thermostat;
+package com.hse.ndolgopolov.thermostat.Activity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,21 +8,25 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
-import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
+import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
 
-/**
- * Created by Igor on 28.05.2015.
- */
-public class WeekActivity extends ActionBarActivity {
+
+public class MainActivity extends ActionBarActivity {
+
+    double currentTemperature = 22.1;
+    double desiredTemperature = 23.0;
+
+    private boolean locked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.week_schedule_layout);
+        setContentView(R.layout.activity_main);
 
         init();
     }
@@ -30,36 +35,42 @@ public class WeekActivity extends ActionBarActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        TextView dayTemp = (TextView) findViewById(R.id.dayTemperatureTextView);
-        TextView dayTempTitle = (TextView) findViewById(R.id.dayTitleTextView);
-        TextView nightTemp = (TextView) findViewById(R.id.nightTemperatureTextView);
-        TextView nightTempTitle = (TextView) findViewById(R.id.nightTitleTextView);
-        TextView temperatureTitle = (TextView) findViewById(R.id.temperatureTitleTextView);
-        TextView scheduleTitle = (TextView) findViewById(R.id.scheduleTitleTextView);
+        TextView currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
+        TextView currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
+        TextView targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
+        TextView schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
 
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
         Typeface roboto_bold = Typeface.createFromAsset(this.getAssets(), "Roboto-Bold.ttf");
 
-        dayTemp.setTypeface(roboto_light);
-        dayTempTitle.setTypeface(roboto_light);
-        temperatureTitle.setTypeface(roboto_light);
-        scheduleTitle.setTypeface(roboto_light);
-        nightTemp.setTypeface(roboto_light);
-        nightTempTitle.setTypeface(roboto_light);
+        currTemp.setTypeface(roboto_light);
+        currTempLabel.setTypeface(roboto_light);
+        targetTemp.setTypeface(roboto_light);
+        schedule.setTypeface(roboto_light);
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
 
-        ListView listView = (ListView) findViewById(R.id.weekListView);
-        WeekAdapter adapter = new WeekAdapter(this);
-        listView.setAdapter(adapter);
+        ImageView lockImageView = (ImageView) findViewById(R.id.lockImageView);
+        lockImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (locked) {
+                    v.setBackgroundResource(R.drawable.ic_lock_open);
+                } else {
+                    v.setBackgroundResource(R.drawable.ic_lock_closed);
+                }
+
+                locked = !locked;
+            }
+        });
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_week_schedule, menu);
+        inflater.inflate(R.menu.menu_main, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -70,14 +81,10 @@ public class WeekActivity extends ActionBarActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch (id) {
-            case R.id.action_upload: {
-                break;
-            }
-
-            case R.id.action_save: {
-                break;
-            }
+        // Calendar icon clicked
+        if (id == R.id.action_calendar) {
+            Intent intent = new Intent(this, WeekActivity.class);
+            startActivity(intent);
         }
 
         return super.onOptionsItemSelected(item);

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content" android:gravity="center">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Day: "
+                android:id="@+id/textView"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="25.0"
+                android:layout_toRightOf="@id/textView"
+                android:id="@+id/dayTemperatureTextView"/>
+    </LinearLayout>
+
+    <com.rey.material.widget.Slider
+            android:id="@+id/sliderDay"
+            style="@style/Material.Widget.Slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:sl_minValue="150"
+            app:sl_maxValue="300"
+            app:sl_primaryColor="?attr/colorPrimary"
+            app:sl_secondaryColor="?attr/colorPrimary"
+            android:layout_below="@id/textView"/>
+
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center" android:layout_marginTop="15dp">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Night: "
+                android:id="@+id/textView2"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="25.0"
+                android:layout_toRightOf="@id/textView2"
+                android:id="@+id/nightTemperatureTextView"/>
+    </LinearLayout>
+
+    <com.rey.material.widget.Slider
+            android:id="@+id/sliderNight"
+            style="@style/Material.Widget.Slider"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            app:sl_minValue="150"
+            app:sl_maxValue="300"
+            app:sl_primaryColor="?attr/colorPrimary"
+            app:sl_secondaryColor="?attr/colorPrimary"
+            android:layout_below="@id/textView2"/>
+</LinearLayout>
