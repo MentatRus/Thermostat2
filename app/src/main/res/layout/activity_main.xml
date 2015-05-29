@@ -16,8 +16,10 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="23.1"
             android:textSize="100dp"
-            android:layout_alignTop="@+id/linearLayout" android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true"/>
+            android:layout_alignTop="@+id/linearLayout"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginLeft="30dp"/>
 
 
     <ImageView
@@ -25,7 +27,7 @@
             android:layout_height="20dp"
             android:id="@+id/imageView3"
             android:background="@drawable/ic_day"
-            android:layout_below="@id/currentTemperatureTextView" android:layout_marginLeft="20dp"
+            android:layout_below="@id/currentTemperatureTextView" android:layout_marginLeft="30dp"
             android:layout_marginTop="3dp"/>
 
     <!--current temperature label-->
@@ -77,8 +79,6 @@
                 android:layout_height="40dp"
             android:id="@+id/minusButton"
                 android:layout_alignBottom="@+id/currentTemperatureTextView"
-                android:layout_alignRight="@+id/desiredTemperatureTextView"
-                android:layout_alignEnd="@+id/desiredTemperatureTextView"
                 drakeet:alpha_pressed="0"
                 drakeet:color_pressed="#660303ff"
                 android:background="@drawable/ic_minus"

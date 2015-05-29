@@ -2,6 +2,7 @@ package com.hse.ndolgopolov.thermostat.Dialog;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.R;
@@ -39,6 +40,13 @@ public class SetTemperatureDialog extends Dialog {
             public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
                 TextView nightTemp = (TextView) findViewById(R.id.nightTemperatureTextView);
                 nightTemp.setText(getDoubleValue(i1) + "");
+            }
+        });
+
+        mNegativeAction.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                cancel();
             }
         });
 
