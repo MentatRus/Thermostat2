@@ -1,6 +1,4 @@
-package com.hse.ndolgopolov.thermostat;
-
-import com.hse.ndolgopolov.thermostat.Interval;
+package com.hse.ndolgopolov.thermostat.Model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,6 +12,10 @@ public class DaySchedule {
     public String name;
     public WeekSchedule week;
     public ArrayList<Interval> intervals = new ArrayList<Interval>();
+
+    public ArrayList<Interval> getIntervals() {
+        return intervals;
+    }
 
     public boolean isFull() {
         return intervals.size() > 4;

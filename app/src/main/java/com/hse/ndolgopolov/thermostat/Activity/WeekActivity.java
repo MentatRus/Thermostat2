@@ -15,8 +15,8 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
 import com.hse.ndolgopolov.thermostat.Dialog.SetTemperatureDialog;
-import com.hse.ndolgopolov.thermostat.Globals;
 import com.hse.ndolgopolov.thermostat.Model.Controller;
+import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;

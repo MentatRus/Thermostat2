@@ -29,7 +29,7 @@ public class Controller {
         if (weekSchedule.isHighTemperature(fakeDate))
             scheduleTemperature = weekSchedule.highTemperature;
         else scheduleTemperature = weekSchedule.lowTemperature;
-        Log.i("Scheduled temperature", scheduleTemperature+"");
+        //Log.i("Scheduled temperature", scheduleTemperature+"");
         if(!isOverriden){
             desiredTemperature = scheduleTemperature;
             return;
