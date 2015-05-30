@@ -11,15 +11,15 @@ import java.util.Collections;
  */
 //ВАЖНО: класс интервал сравнивается по значениям (переопределен equals)
 public class DaySchedule {
-    String name;
-    WeekSchedule week;
-    ArrayList<Interval> intervals = new ArrayList<Interval>();
+    public String name;
+    public WeekSchedule week;
+    public ArrayList<Interval> intervals = new ArrayList<Interval>();
 
-    boolean isFull() {
+    public boolean isFull() {
         return intervals.size() > 4;
     }
 
-    void addInterval(int h1, int m1, int h2, int m2) {
+    public void addInterval(int h1, int m1, int h2, int m2) {
         Interval newInt = new Interval(h1, m1, h2, m2);
         if (intervals.contains(newInt)) {
             return;
@@ -28,7 +28,7 @@ public class DaySchedule {
         Collections.sort(intervals);
     }
 
-    void addInterval(Interval interval) {
+    public void addInterval(Interval interval) {
         Interval newInt = new Interval(interval);
         if (intervals.contains(newInt)) {
             return;
@@ -37,21 +37,21 @@ public class DaySchedule {
         Collections.sort(intervals);
     }
 
-    Interval findInterval(Interval interval) {
+    public Interval findInterval(Interval interval) {
         for (Interval interval1 : intervals) {
             if (interval1.equals(interval)) return interval1;
         }
         return null;
     }
 
-    boolean containsInterval(Interval interval) {
+    public boolean containsInterval(Interval interval) {
         for (Interval interval1 : intervals) {
             if (interval1.equals(interval)) return true;
         }
         return false;
     }
 
-    boolean includesTime(Calendar calendar) {
+    public boolean includesTime(Calendar calendar) {
         for (Interval interval : intervals) {
             if (interval.includesTime(calendar)) return true;
         }

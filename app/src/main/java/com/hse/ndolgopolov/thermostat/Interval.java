@@ -46,6 +46,20 @@ public class Interval implements Comparable<Interval> {
     }
 
     @Override
+    public String toString() {
+        String s1 = String.valueOf(begin.get(Calendar.HOUR));
+        s1 = s1.length()<2?"0"+s1:s1;
+        String s2 = String.valueOf(begin.get(Calendar.MINUTE));
+        s2 = s2.length()<2?"0"+s2:s2;
+        String s3 = String.valueOf(end.get(Calendar.HOUR));
+        s3 = s3.length()<2?"0"+s3:s3;
+        String s4 = String.valueOf(end.get(Calendar.MINUTE));
+        s4 = s4.length()<2?"0"+s4:s4;
+        String res = s1 +":"+s2+ " - "+s3+":"+s4;
+        return res;
+    }
+
+    @Override
     public int hashCode() {
         int result = begin.hashCode();
         result = 31 * result + end.hashCode();
