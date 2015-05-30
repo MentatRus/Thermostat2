@@ -7,6 +7,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Day of the week"
-            android:id="@+id/dayOfTheWeekTextView" android:layout_marginTop="5dp"/>
+            android:text="Element"
+            android:id="@+id/singleElementTextView" android:layout_marginTop="5dp"/>
 </LinearLayout>

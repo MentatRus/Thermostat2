@@ -1,8 +1,6 @@
-package com.hse.ndolgopolov.thermostat;
+package com.hse.ndolgopolov.thermostat.Model;
 
 import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 
 import java.util.*;
 
@@ -28,7 +26,7 @@ public class WeekSchedule{
 
     boolean isHighTemperature(Calendar calendar) {
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK )-1;
-        Log.i("Day_of_week", dayOfWeek+"");
+        //Log.i("Day_of_week", dayOfWeek+"");
         return days[dayOfWeek].includesTime(calendar);
     }
 

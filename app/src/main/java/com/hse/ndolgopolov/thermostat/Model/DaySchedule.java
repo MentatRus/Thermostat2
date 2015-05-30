@@ -1,4 +1,4 @@
-package com.hse.ndolgopolov.thermostat;
+package com.hse.ndolgopolov.thermostat.Model;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -11,7 +11,11 @@ import java.util.Collections;
 public class DaySchedule {
     String name;
     WeekSchedule week;
-    ArrayList<Interval> intervals = new ArrayList<Interval>();
+    ArrayList<Interval> intervals = new ArrayList<>();
+
+    public ArrayList<Interval> getIntervals() {
+        return intervals;
+    }
 
     boolean isFull() {
         return intervals.size() > 4;
@@ -112,5 +116,12 @@ class Interval implements Comparable<Interval> {
         int minute = calendar.get(Calendar.MINUTE);
         return begin.get(Calendar.HOUR) <= hour && begin.get(Calendar.MINUTE) <= minute &&
                 end.get(Calendar.HOUR) >= hour && begin.get(Calendar.MINUTE) >= minute;
+    }
+
+    @Override
+    public String toString() {
+
+        //TODO return string representations
+        return "test";
     }
 }

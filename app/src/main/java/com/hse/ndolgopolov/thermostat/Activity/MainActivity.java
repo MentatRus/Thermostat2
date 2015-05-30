@@ -5,20 +5,17 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.hse.ndolgopolov.thermostat.Controller;
 import com.hse.ndolgopolov.thermostat.Globals;
+import com.hse.ndolgopolov.thermostat.Model.Controller;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -90,7 +87,6 @@ public class MainActivity extends ActionBarActivity {
                         controller.setDesiredTemperature();
                         controller.setCurrentTemperature();
                         updateFromController();
-                        Log.i("Update", "Called");
                     } catch (InterruptedException ex) {
                         c = false;//Убери, если будет вылетать
                     }
@@ -169,7 +165,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
-        Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+
     }
 }
 
