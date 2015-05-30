@@ -11,7 +11,7 @@ import java.util.*;
  */
 public class WeekSchedule{
     public double highTemperature = 23;
-    public double lowTemperature = 18;
+    public double lowTemperature = 18.8;
     DaySchedule[] days = new DaySchedule[7];
 
     public WeekSchedule() {
@@ -28,7 +28,8 @@ public class WeekSchedule{
 
     boolean isHighTemperature(Calendar calendar) {
         int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK )-1;
-        Log.i("Day_of_week", dayOfWeek+"");
+        //Log.i("Day_of_week", dayOfWeek+"");
+        //Log.i("day of week includes time", String.valueOf(days[dayOfWeek].includesTime(calendar)));
         return days[dayOfWeek].includesTime(calendar);
     }
 
@@ -66,7 +67,7 @@ public class WeekSchedule{
         return res;
     }
 
-    void addInterval(Interval interval, Collection<Integer> daysToEdit) {
+    public void addInterval(Interval interval, Collection<Integer> daysToEdit) {
         for (Integer day : daysToEdit) {
             days[day].addInterval(interval);
         }

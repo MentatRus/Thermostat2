@@ -5,4 +5,5 @@ package com.hse.ndolgopolov.thermostat;
  */
 public class Globals {
     public static Controller controller = new Controller();
+
 }

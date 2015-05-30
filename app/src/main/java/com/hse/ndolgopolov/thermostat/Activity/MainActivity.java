@@ -15,10 +15,12 @@ import android.widget.TextView;
 
 import com.hse.ndolgopolov.thermostat.Controller;
 import com.hse.ndolgopolov.thermostat.Globals;
+import com.hse.ndolgopolov.thermostat.Interval;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 
 
@@ -30,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
     TextView schedule;
     TextView fakeDate;
     Controller controller = Globals.controller;
-    private boolean locked = false;
+    //private boolean locked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,6 +78,10 @@ public class MainActivity extends ActionBarActivity {
 
             }
         });
+        //TEST!!!
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(6);
+        controller.weekSchedule.addInterval(new Interval(2, 50, 3, 30),list);
         updateFromController();
         final int minuteLength = 60000 / controller.timeScale;
         new Thread(new Runnable() {
@@ -90,7 +96,7 @@ public class MainActivity extends ActionBarActivity {
                         controller.setDesiredTemperature();
                         controller.setCurrentTemperature();
                         updateFromController();
-                        Log.i("Update", "Called");
+                        //Log.i("Update", "Called");
                     } catch (InterruptedException ex) {
                         c = false;//Убери, если будет вылетать
                     }
@@ -169,7 +175,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
-        Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+        //Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
     }
 }
 

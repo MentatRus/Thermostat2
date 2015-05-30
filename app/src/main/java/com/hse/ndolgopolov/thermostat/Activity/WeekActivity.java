@@ -46,13 +46,16 @@ public class WeekActivity extends ActionBarActivity {
     private void showDialog() {
         final SetTemperatureDialog dialog = new SetTemperatureDialog(this);
         dialog.show();
+
         dialog.getPositiveButton().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 TextView dayTextView = (TextView) dialog.findViewById(R.id.dayTemperatureTextView);
                 double dayTemp = Double.parseDouble(dayTextView.getText().toString());
+
                 //dayTempTextView.setText(dayTemp + "");
                 controller.weekSchedule.highTemperature = dayTemp;
+
                 TextView nightTextView = (TextView) dialog.findViewById(R.id.nightTemperatureTextView);
                 double nightTemp = Double.parseDouble(nightTextView.getText().toString());
                 //nightTempTextView.setText(nightTemp + "");

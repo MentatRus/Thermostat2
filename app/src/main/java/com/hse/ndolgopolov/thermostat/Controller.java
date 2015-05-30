@@ -18,7 +18,7 @@ public class Controller {
     public boolean isDay = false;
     public int timeScale = 100;
     public WeekSchedule weekSchedule;
-    public double desiredTemperature = 23;
+    public double desiredTemperature = 0;
     public double currentTemperature = 22;
     public double temperatureChangeSpeed = 0.05;
     public Calendar fakeDate;
@@ -34,9 +34,11 @@ public class Controller {
         if (weekSchedule.isHighTemperature(fakeDate))
             scheduleTemperature = weekSchedule.highTemperature;
         else scheduleTemperature = weekSchedule.lowTemperature;
+        Log.i("Scheduled temperature", scheduleTemperature+"");
         if(!isOverriden){
             desiredTemperature = scheduleTemperature;
             return;
+
         }
         if(isOverriden && !isPermanentlyOverriden){
             if(weekSchedule.isHighTemperature(fakeDate) != isDay){
