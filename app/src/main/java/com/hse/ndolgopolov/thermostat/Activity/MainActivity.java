@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.hse.ndolgopolov.thermostat.Controller;
+import com.hse.ndolgopolov.thermostat.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
@@ -28,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     TextView targetTemp;
     TextView schedule;
     TextView fakeDate;
-    Controller controller = new Controller(this);
+    Controller controller = Globals.controller;
     private boolean locked = false;
 
     @Override

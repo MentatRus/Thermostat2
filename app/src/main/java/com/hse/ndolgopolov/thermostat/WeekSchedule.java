@@ -1,11 +1,15 @@
 package com.hse.ndolgopolov.thermostat;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+import android.util.Log;
+
 import java.util.*;
 
 /**
  * Created by Nickolay Dolgopolov on 28.05.2015.
  */
-public class WeekSchedule {
+public class WeekSchedule{
     public double highTemperature = 23;
     public double lowTemperature = 18;
     DaySchedule[] days = new DaySchedule[7];
@@ -16,9 +20,15 @@ public class WeekSchedule {
             days[i].week = this;
         }
     }
+    public WeekSchedule(Parcel in){
+        highTemperature = in.readDouble();
+        lowTemperature = in.readDouble();
+
+    }
 
     boolean isHighTemperature(Calendar calendar) {
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK);
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK )-1;
+        Log.i("Day_of_week", dayOfWeek+"");
         return days[dayOfWeek].includesTime(calendar);
     }
 
@@ -83,4 +93,28 @@ public class WeekSchedule {
             days[day].intervals.remove(oldInt);
         }
     }
-}
+
+//    @Override
+//    public int describeContents() {
+//        return 0;
+//    }
+//
+//    @Override
+//    public void writeToParcel(Parcel dest, int flags) {
+////        dest.writeArray(new Object[]{new Double(highTemperature),new Double(lowTemperature),days});
+////        dest.w
+//        dest.writeDouble(highTemperature);
+//        dest.writeDouble(lowTemperature);
+//        dest.writeArray(days);
+//    }
+//    public static final Parcelable.Creator<WeekSchedule> CREATOR = new Parcelable.Creator<WeekSchedule>(){
+//        @Override
+//        public WeekSchedule createFromParcel(Parcel source) {
+//            return null;
+//        }
+//
+//        @Override
+//        public WeekSchedule[] newArray(int size) {
+//            return new WeekSchedule[0];
+//        }
+    }

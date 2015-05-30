@@ -20,13 +20,13 @@ public class Controller {
     public WeekSchedule weekSchedule;
     public double desiredTemperature = 23;
     public double currentTemperature = 22;
-    public double temperatureChangeSpeed = 0.1;
+    public double temperatureChangeSpeed = 0.05;
     public Calendar fakeDate;
-    MainActivity mainActivity;
-    public Controller(MainActivity activity) {
+    //MainActivity mainActivity;
+    public Controller() {
         weekSchedule = new WeekSchedule();
         fakeDate = Calendar.getInstance();
-        mainActivity = activity;
+        //mainActivity = activity;
     }
 
     public void setDesiredTemperature() {

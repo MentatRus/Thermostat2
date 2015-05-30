@@ -12,7 +12,9 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
+import com.hse.ndolgopolov.thermostat.Controller;
 import com.hse.ndolgopolov.thermostat.Dialog.SetTemperatureDialog;
+import com.hse.ndolgopolov.thermostat.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
@@ -25,6 +27,7 @@ public class WeekActivity extends ActionBarActivity {
     private TextView dayTempTextView;
     private TextView nightTempTextView;
     private Button changeTempButton;
+    private Controller controller = Globals.controller;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,12 +51,13 @@ public class WeekActivity extends ActionBarActivity {
             public void onClick(View v) {
                 TextView dayTextView = (TextView) dialog.findViewById(R.id.dayTemperatureTextView);
                 double dayTemp = Double.parseDouble(dayTextView.getText().toString());
-                dayTempTextView.setText(dayTemp + "");
-
+                //dayTempTextView.setText(dayTemp + "");
+                controller.weekSchedule.highTemperature = dayTemp;
                 TextView nightTextView = (TextView) dialog.findViewById(R.id.nightTemperatureTextView);
                 double nightTemp = Double.parseDouble(nightTextView.getText().toString());
-                nightTempTextView.setText(nightTemp + "");
-
+                //nightTempTextView.setText(nightTemp + "");
+                controller.weekSchedule.lowTemperature = nightTemp;
+                updateFromController();
                 dialog.cancel();
             }
         });
@@ -130,5 +134,9 @@ public class WeekActivity extends ActionBarActivity {
         }
 
         return titleTextView;
+    }
+    void updateFromController(){
+        dayTempTextView.setText(String.format("%.1f",controller.weekSchedule.highTemperature));
+        nightTempTextView.setText(String.format("%.1f",controller.weekSchedule.lowTemperature));
     }
 }
