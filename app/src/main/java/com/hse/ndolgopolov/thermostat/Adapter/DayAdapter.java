@@ -40,7 +40,7 @@ public class DayAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.single_element_in_listview, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.single_element, parent, false);
         }
 
         Typeface roboto_light = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");

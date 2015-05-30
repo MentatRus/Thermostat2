@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:fab="http://schemas.android.com/tools"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -9,44 +10,88 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="New interval"
-            android:id="@+id/textView3" android:layout_gravity="center_horizontal" android:textSize="50dp"
-            android:layout_marginTop="50dp"/>
-    <LinearLayout
+            android:id="@+id/titleTextView" android:layout_gravity="center_horizontal" android:textSize="50dp"
+            android:layout_marginTop="35dp"/>
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp">
+            android:layout_marginTop="20dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="From: "
-                android:id="@+id/textView4"/>
+                android:id="@+id/fromTextView" android:textSize="30dp" android:layout_marginLeft="90dp"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="12:14"
-                android:id="@+id/textView5" android:layout_marginLeft="10dp"/>
-    </LinearLayout>
+                android:layout_toRightOf="@id/fromTextView"
+                android:id="@+id/fromTimeTextView" android:layout_marginLeft="10dp" android:textSize="30dp"/>
+        </RelativeLayout>
 
-    <LinearLayout
+        <com.rey.material.widget.Slider
+                android:id="@+id/sliderFrom"
+                style="@style/Material.Widget.Slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:sl_minValue="0"
+                app:sl_maxValue="1440"
+                app:sl_primaryColor="?attr/colorPrimary"
+                app:sl_secondaryColor="?attr/colorPrimary" android:layout_gravity="center_horizontal"
+                />
+
+        <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp">
+            android:layout_marginTop="10dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="To: "
-                android:id="@+id/textView6"/>
+                android:id="@+id/toTextView" android:textSize="30dp" android:layout_marginLeft="110dp"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="15:00"
-                android:id="@+id/textView7" android:layout_marginLeft="10dp"/>
-    </LinearLayout>
+                android:id="@+id/toTimeTextView"
+                android:textSize="30dp"
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/toTextView"/>
+        </RelativeLayout>
+
+        <com.rey.material.widget.Slider
+                android:id="@+id/sliderTo"
+                style="@style/Material.Widget.Slider"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                app:sl_minValue="0"
+                app:sl_maxValue="1440"
+                app:sl_primaryColor="?attr/colorPrimary"
+                app:sl_secondaryColor="?attr/colorPrimary"/>
+        <ListView
+                android:layout_width="match_parent"
+                android:layout_height="235dp"
+                android:id="@+id/listView"
+                android:layout_gravity="center_horizontal"
+                android:divider="@null"/>
+
+        <com.melnykov.fab.FloatingActionButton
+                android:id="@+id/fab"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="16dp"
+                android:src="@drawable/ic_check"
+                fab:fab_colorNormal="@color/accent"
+                fab:fab_colorPressed="@color/accent_pressed"
+                fab:fab_colorRipple="@color/ripple"/>
+
 </LinearLayout>

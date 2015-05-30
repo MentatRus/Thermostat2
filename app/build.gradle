@@ -25,4 +25,5 @@ dependencies {
     compile 'me.drakeet.library:androiduiview:1.1.0'
     compile 'com.github.rey5137:material:1.1.1'
     compile 'com.melnykov:floatingactionbutton:1.3.0'
+    compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
 }

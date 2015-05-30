@@ -19,6 +19,8 @@
         </activity>
         <activity android:name=".Activity.DayActivity">
         </activity>
+        <activity android:name=".Activity.NewIntervalActivity">
+        </activity>
     </application>
 
 </manifest>

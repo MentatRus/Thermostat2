@@ -11,12 +11,12 @@ import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 
 /**
- * Created by Igor on 28.05.2015.
+ * Created by Igor on 30.05.2015.
  */
-public class WeekAdapter extends BaseAdapter {
+public class WeekAdapterWithCheckbox extends BaseAdapter {
     private Context context;
 
-    public WeekAdapter(Context context) {
+    public WeekAdapterWithCheckbox(Context context) {
         this.context = context;
     }
 
@@ -38,10 +38,10 @@ public class WeekAdapter extends BaseAdapter {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
-            convertView = LayoutInflater.from(context).inflate(R.layout.single_element, parent, false);
+            convertView = LayoutInflater.from(context).inflate(R.layout.single_element_with_checkbox, parent, false);
         }
 
-        TextView textView = (TextView) convertView.findViewById(R.id.singleElementTextView);
+        TextView textView = (TextView) convertView.findViewById(R.id.dayTextView);
         textView.setText(Globals.weekDays[position]);
 
         Typeface roboto_light = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
@@ -49,4 +49,11 @@ public class WeekAdapter extends BaseAdapter {
 
         return convertView;
     }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return false;
+    }
+
+
 }

@@ -11,7 +11,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Day of the week"
             android:id="@+id/dayTitleTextView" android:layout_gravity="center_horizontal" android:textSize="50dp"
-            android:layout_marginTop="50dp"/>
+            android:layout_marginTop="35dp"/>
     <ListView
             android:layout_width="match_parent"
             android:layout_height="200dp"
