@@ -1,9 +1,4 @@
-package com.hse.ndolgopolov.thermostat;
-
-import android.app.Activity;
-import android.util.Log;
-
-import com.hse.ndolgopolov.thermostat.Activity.MainActivity;
+package com.hse.ndolgopolov.thermostat.Model;
 
 import java.util.Calendar;
 

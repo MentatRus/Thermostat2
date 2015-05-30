@@ -1,5 +1,6 @@
 package com.hse.ndolgopolov.thermostat.Activity;
 
+import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,13 +9,14 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
-import com.hse.ndolgopolov.thermostat.Controller;
 import com.hse.ndolgopolov.thermostat.Dialog.SetTemperatureDialog;
 import com.hse.ndolgopolov.thermostat.Globals;
+import com.hse.ndolgopolov.thermostat.Model.Controller;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
@@ -28,6 +30,8 @@ public class WeekActivity extends ActionBarActivity {
     private TextView nightTempTextView;
     private Button changeTempButton;
     private Controller controller = Globals.controller;
+    private ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,12 +39,26 @@ public class WeekActivity extends ActionBarActivity {
 
         init();
 
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String day = Globals.weekDays[position];
+                showDayActivity(day);
+            }
+        });
+
         changeTempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
+    }
+
+    private void showDayActivity(String day) {
+        Intent intent = new Intent(this, DayActivity.class);
+        intent.putExtra("day", day);
+        startActivity(intent);
     }
 
     private void showDialog() {
@@ -93,7 +111,7 @@ public class WeekActivity extends ActionBarActivity {
 
         changeTempButton = (Button) findViewById(R.id.changeTemperatureButton);
 
-        ListView listView = (ListView) findViewById(R.id.weekListView);
+        listView = (ListView) findViewById(R.id.weekListView);
         WeekAdapter adapter = new WeekAdapter(this);
         listView.setAdapter(adapter);
     }

@@ -7,27 +7,29 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import com.hse.ndolgopolov.thermostat.Globals;
+import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
 import com.hse.ndolgopolov.thermostat.R;
 
 /**
- * Created by Igor on 28.05.2015.
+ * Created by Igor on 30.05.2015.
  */
-public class WeekAdapter extends BaseAdapter {
+public class DayAdapter extends BaseAdapter {
     private Context context;
+    private DaySchedule schedule;
 
-    public WeekAdapter(Context context) {
+    public DayAdapter(Context context, DaySchedule schedule) {
         this.context = context;
+        this.schedule = schedule;
     }
 
     @Override
     public int getCount() {
-        return Globals.weekDays.length;
+        return schedule.getIntervals().size();
     }
 
     @Override
     public Object getItem(int position) {
-        return Globals.weekDays[position];
+        return schedule.getIntervals().get(position);
     }
 
     @Override
@@ -41,10 +43,10 @@ public class WeekAdapter extends BaseAdapter {
             convertView = LayoutInflater.from(context).inflate(R.layout.single_element_in_listview, parent, false);
         }
 
-        TextView textView = (TextView) convertView.findViewById(R.id.singleElementTextView);
-        textView.setText(Globals.weekDays[position]);
-
         Typeface roboto_light = Typeface.createFromAsset(context.getAssets(), "Roboto-Light.ttf");
+
+        TextView textView = (TextView) convertView.findViewById(R.id.singleElementTextView);
+        textView.setText(getItem(position).toString());
         textView.setTypeface(roboto_light);
 
         return convertView;
