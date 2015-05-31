@@ -19,7 +19,7 @@
         </activity>
         <activity android:name=".Activity.DayActivity">
         </activity>
-        <activity android:name=".Activity.NewIntervalActivity">
+        <activity android:name=".Activity.EditIntervalActivity">
         </activity>
     </application>
 

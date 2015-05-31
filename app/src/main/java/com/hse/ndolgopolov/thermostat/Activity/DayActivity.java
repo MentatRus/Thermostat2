@@ -50,7 +50,8 @@ public class DayActivity extends Activity {
     }
 
     private void showNewIntervalActivity() {
-        Intent intent = new Intent(this, NewIntervalActivity.class);
+        Intent intent = new Intent(this, EditIntervalActivity.class);
+        intent.putExtra("new", true);
         startActivity(intent);
     }
 }

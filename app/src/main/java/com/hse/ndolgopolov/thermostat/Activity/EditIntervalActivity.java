@@ -6,7 +6,6 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapterWithCheckbox;
@@ -17,7 +16,7 @@ import com.rey.material.widget.Slider;
 /**
  * Created by Igor on 30.05.2015.
  */
-public class NewIntervalActivity extends Activity {
+public class EditIntervalActivity extends Activity {
 
     private ListView listView;
     private TextView fromTime;
@@ -26,7 +25,7 @@ public class NewIntervalActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.add_interval_layout);
+        setContentView(R.layout.edit_interval_layout);
         //Log.i("Check", "1");
         init();
         //Log.i("Check", "4");

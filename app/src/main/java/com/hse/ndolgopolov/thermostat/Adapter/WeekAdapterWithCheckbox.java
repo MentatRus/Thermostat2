@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
@@ -42,18 +41,15 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.single_element_with_checkbox, parent, false);
         }
+
         com.rey.material.widget.CheckBox cb = (com.rey.material.widget.CheckBox)convertView.findViewById(R.id.checkBox);
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
-                    checkedDays[position] = true;
-                }
-                else {
-                    checkedDays[position] = false;
-                }
+                checkedDays[position] = isChecked;
             }
         });
+
         TextView textView = (TextView) convertView.findViewById(R.id.dayTextView);
         textView.setText(Globals.weekDays[position]);
 
