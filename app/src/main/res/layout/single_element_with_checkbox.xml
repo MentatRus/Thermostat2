@@ -12,7 +12,7 @@
             style="@style/Material.Drawable.CheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cbd_strokeColor="?attr/colorPrimary"
+            app:cbd_strokeColor="@color/color_state_list"
             />
 
     <TextView
@@ -20,7 +20,8 @@
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Large Text"
-            android:id="@+id/dayTextView" android:layout_gravity="center_vertical"/>
+            android:id="@+id/dayTextView"
+            android:layout_gravity="center_vertical"/>
 
 
 </LinearLayout>
