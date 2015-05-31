@@ -264,12 +264,12 @@ public class MainActivity extends ActionBarActivity {
         fakeDate.post(new Runnable() {
             @Override
             public void run() {
-                fakeDate.setText(controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+                fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
             }
         });
-        //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
+        //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
 
-        //Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+        //Log.i("Update",controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
 
     }
     public void clickSchedule(View V){
