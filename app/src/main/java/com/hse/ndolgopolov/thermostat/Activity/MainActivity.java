@@ -48,7 +48,8 @@ public class MainActivity extends ActionBarActivity {
 
         listView = (ListView) findViewById(R.id.todayScheduleListView);
         // TODO pass today's schedule
-        listView.setAdapter(new DayAdapter(this, new DaySchedule()));
+        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1];
+        listView.setAdapter(new DayAdapter(this, daySchedule));
 
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
