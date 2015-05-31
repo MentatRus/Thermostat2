@@ -18,6 +18,8 @@ import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
 import java.util.Calendar;
 
+import java.util.Calendar;
+
 /**
  * Created by Igor on 30.05.2015.
  */
@@ -45,10 +47,12 @@ public class EditIntervalActivity extends Activity {
         init();
         //Log.i("Check", "4");
 
+
         beginHour = Globals.controller.fakeDate.get(Calendar.HOUR);
         beginMinute = Globals.controller.fakeDate.get(Calendar.MINUTE);
         endHour = (Globals.controller.fakeDate.get(Calendar.HOUR) + 1)%24;
         endMinute = Globals.controller.fakeDate.get(Calendar.MINUTE);
+
 
         sliderFrom = (Slider) findViewById(R.id.sliderFrom);
 
@@ -80,8 +84,17 @@ public class EditIntervalActivity extends Activity {
                 }
             }
         });
-        sliderFrom.setValue(beginHour * 60 + beginMinute, false);
-        sliderTo.setValue(endHour * 60 + endMinute, false);
+
+
+        if (!newInterval) {
+            sliderFrom.setValue(getBeginHour() * 60 + getBeginMinute(), true);
+            sliderTo.setValue(getEndHour() * 60 + getEndMinute(), true);
+        }
+        else{
+            sliderFrom.setValue(beginHour * 60 + beginMinute, true);
+            sliderTo.setValue(beginHour * 60 + beginMinute, true);
+        }
+
     }
 
     private String getStringTime(int i) {
@@ -94,6 +107,22 @@ public class EditIntervalActivity extends Activity {
         result += hour + ":" + minute;
 
         return result;
+    }
+
+    private int getBeginHour() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).begin.get(Calendar.HOUR_OF_DAY);
+    }
+
+    private int getBeginMinute() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).begin.get(Calendar.MINUTE);
+    }
+
+    private int getEndHour() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).end.get(Calendar.HOUR_OF_DAY);
+    }
+
+    private int getEndMinute() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).end.get(Calendar.MINUTE);
     }
 
     private void init() {
