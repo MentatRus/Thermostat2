@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -153,8 +152,6 @@ public class WeekActivity extends ActionBarActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_week_schedule, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -164,18 +161,6 @@ public class WeekActivity extends ActionBarActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-
-        switch (id) {
-            case R.id.action_upload: {
-                showUploadDialog();
-                break;
-            }
-
-            case R.id.action_download: {
-                showDownloadDialog();
-                break;
-            }
-        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -197,11 +182,5 @@ public class WeekActivity extends ActionBarActivity {
         nightTempTextView.setText(String.format("%.1f",controller.weekSchedule.lowTemperature));
     }
 
-    public double getDayTemp() {
-        return dayTemp;
-    }
 
-    public double getNightTemp() {
-        return nightTemp;
-    }
 }
