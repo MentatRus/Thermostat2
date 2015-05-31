@@ -3,12 +3,16 @@ package com.hse.ndolgopolov.thermostat.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -17,12 +21,68 @@ import com.hse.ndolgopolov.thermostat.Model.Controller;
 import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
-import me.drakeet.library.UIButton;
 
 import java.lang.reflect.Field;
 import java.util.Calendar;
 
+import me.drakeet.library.UIButton;
 
+class RepeatListener implements View.OnTouchListener {
+
+    private Handler handler = new Handler();
+
+    private int initialInterval;
+    private final int normalInterval;
+    private final View.OnClickListener clickListener;
+
+    private Runnable handlerRunnable = new Runnable() {
+        @Override
+        public void run() {
+            handler.postDelayed(this, normalInterval);
+            clickListener.onClick(downView);
+        }
+    };
+
+    private View downView;
+
+    /**
+     * @param initialInterval The interval after first click event
+     * @param normalInterval The interval after second and subsequent click
+     *       events
+     * @param clickListener The OnClickListener, that will be called
+     *       periodically
+     */
+    public RepeatListener(int initialInterval, int normalInterval,
+                          View.OnClickListener clickListener) {
+        if (clickListener == null)
+            throw new IllegalArgumentException("null runnable");
+        if (initialInterval < 0 || normalInterval < 0)
+            throw new IllegalArgumentException("negative interval");
+
+        this.initialInterval = initialInterval;
+        this.normalInterval = normalInterval;
+        this.clickListener = clickListener;
+    }
+
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()) {
+            case MotionEvent.ACTION_DOWN:
+                handler.removeCallbacks(handlerRunnable);
+                handler.postDelayed(handlerRunnable, initialInterval);
+                downView = view;
+                clickListener.onClick(view);
+                return true;
+            case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
+                handler.removeCallbacks(handlerRunnable);
+                downView = null;
+                return true;
+        }
+
+        return false;
+    }
+
+}
 public class MainActivity extends ActionBarActivity {
     MainActivity thisActivity = this;
     TextView currTemp;
@@ -32,7 +92,7 @@ public class MainActivity extends ActionBarActivity {
     TextView fakeDate;
     Controller controller = Globals.controller;
     ListView listView;
-    private UIButton editButton;
+    //private boolean locked = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +111,14 @@ public class MainActivity extends ActionBarActivity {
         // TODO pass today's schedule
         DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1];
         listView.setAdapter(new DayAdapter(this, daySchedule));
-
-        editButton = (UIButton) findViewById(R.id.editButton);
-        editButton.setOnClickListener(new View.OnClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(thisActivity, DayActivity.class);
                 intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1);
                 startActivity(intent);
             }
         });
-
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
         targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
@@ -77,6 +134,26 @@ public class MainActivity extends ActionBarActivity {
         schedule.setTypeface(roboto_light);
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
+
+        UIButton plusButton = (UIButton)findViewById(R.id.plusButton);
+        plusButton.setOnTouchListener(new RepeatListener(400, 30, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.desiredTemperature += 0.1;
+                controller.isOverriden = true;
+                updateFromController();
+            }
+        }));
+
+        UIButton minusButton = (UIButton)findViewById(R.id.minusButton);
+        minusButton.setOnTouchListener(new RepeatListener(400, 30, new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                controller.desiredTemperature -= 0.1;
+                controller.isOverriden = true;
+                updateFromController();
+            }
+        }));
 
         ImageView lockImageView = (ImageView) findViewById(R.id.lockImageView);
         lockImageView.setOnClickListener(new View.OnClickListener() {
@@ -145,16 +222,16 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-    public void clickPlus(View V){
-        controller.desiredTemperature += 0.1;
-        controller.isOverriden = true;
-        updateFromController();
-    }
-    public void clickMinus(View V){
-        controller.desiredTemperature -= 0.1;
-        controller.isOverriden = true;
-        updateFromController();
-    }
+//    public void clickPlus(View V){
+//        controller.desiredTemperature += 0.1;
+//        controller.isOverriden = true;
+//        updateFromController();
+//    }
+//    public void clickMinus(View V){
+//        controller.desiredTemperature -= 0.1;
+//        controller.isOverriden = true;
+//        updateFromController();
+//    }
 
     private TextView getActionBarTextView(Toolbar toolbar) {
         TextView titleTextView = null;
@@ -187,12 +264,15 @@ public class MainActivity extends ActionBarActivity {
         fakeDate.post(new Runnable() {
             @Override
             public void run() {
-                fakeDate.setText(controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+                fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
             }
         });
-        //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
+        //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
 
-        //Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+        //Log.i("Update",controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+
+    }
+    public void clickSchedule(View V){
 
     }
 }

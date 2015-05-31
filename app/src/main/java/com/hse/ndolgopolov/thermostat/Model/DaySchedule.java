@@ -73,8 +73,8 @@ public class DaySchedule {
 //    public Interval(int h1, int m1, int h2, int m2) {
 //        begin = Calendar.getInstance();
 //        end = Calendar.getInstance();
-//        begin.add(Calendar.HOUR, h1);
-//        end.add(Calendar.HOUR, h2);
+//        begin.add(Calendar.HOUR_OF_DAY, h1);
+//        end.add(Calendar.HOUR_OF_DAY, h2);
 //        begin.add(Calendar.MINUTE, m1);
 //        end.add(Calendar.MINUTE, m2);
 //    }
@@ -82,12 +82,12 @@ public class DaySchedule {
 //    public Interval(Interval interval) {
 //        begin = Calendar.getInstance();
 //        end = Calendar.getInstance();
-//        int h1 = interval.begin.get(Calendar.HOUR);
-//        int h2 = interval.end.get(Calendar.HOUR);
+//        int h1 = interval.begin.get(Calendar.HOUR_OF_DAY);
+//        int h2 = interval.end.get(Calendar.HOUR_OF_DAY);
 //        int m1 = interval.begin.get(Calendar.MINUTE);
 //        int m2 = interval.end.get(Calendar.MINUTE);
-//        begin.add(Calendar.HOUR, h1);
-//        end.add(Calendar.HOUR, h2);
+//        begin.add(Calendar.HOUR_OF_DAY, h1);
+//        end.add(Calendar.HOUR_OF_DAY, h2);
 //        begin.add(Calendar.MINUTE, m1);
 //        end.add(Calendar.MINUTE, m2);
 //    }
@@ -117,9 +117,9 @@ public class DaySchedule {
 //    }
 //
 //    boolean includesTime(Calendar calendar) {
-//        int hour = calendar.get(Calendar.HOUR);
+//        int hour = calendar.get(Calendar.HOUR_OF_DAY);
 //        int minute = calendar.get(Calendar.MINUTE);
-//        return begin.get(Calendar.HOUR) <= hour && begin.get(Calendar.MINUTE) <= minute &&
-//                end.get(Calendar.HOUR) >= hour && begin.get(Calendar.MINUTE) >= minute;
+//        return begin.get(Calendar.HOUR_OF_DAY) <= hour && begin.get(Calendar.MINUTE) <= minute &&
+//                end.get(Calendar.HOUR_OF_DAY) >= hour && begin.get(Calendar.MINUTE) >= minute;
 //    }
 //}
