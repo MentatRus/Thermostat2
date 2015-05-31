@@ -1,6 +1,7 @@
 package com.hse.ndolgopolov.thermostat.Activity;
 
 import android.app.Activity;
+
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,10 @@ import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapterWithCheckbox;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 import com.rey.material.widget.Slider;
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
+
+import java.util.Calendar;
 
 /**
  * Created by Igor on 30.05.2015.
@@ -30,7 +35,8 @@ public class EditIntervalActivity extends Activity {
 
     private Slider sliderFrom;
     private Slider sliderTo;
-
+    TimePickerDialog.OnTimeSetListener onTimeSetListenerFrom;
+    TimePickerDialog.OnTimeSetListener onTimeSetListenerTo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +45,13 @@ public class EditIntervalActivity extends Activity {
         init();
         //Log.i("Check", "4");
 
+        beginHour = Globals.controller.fakeDate.get(Calendar.HOUR);
+        beginMinute = Globals.controller.fakeDate.get(Calendar.MINUTE);
+        endHour = (Globals.controller.fakeDate.get(Calendar.HOUR) + 1)%24;
+        endMinute = Globals.controller.fakeDate.get(Calendar.MINUTE);
+
         sliderFrom = (Slider) findViewById(R.id.sliderFrom);
+
         sliderFrom.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
             @Override
             public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
@@ -68,6 +80,8 @@ public class EditIntervalActivity extends Activity {
                 }
             }
         });
+        sliderFrom.setValue(beginHour * 60 + beginMinute, false);
+        sliderTo.setValue(endHour * 60 + endMinute, false);
     }
 
     private String getStringTime(int i) {
@@ -96,6 +110,21 @@ public class EditIntervalActivity extends Activity {
         title.setTypeface(roboto_light);
         from.setTypeface(roboto_light);
         fromTime.setTypeface(roboto_light);
+        fromTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(onTimeSetListenerFrom, beginHour, beginMinute, true);
+                timePickerDialog.show(getFragmentManager(), "Start time");
+            }
+        });
+        toTime.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(onTimeSetListenerTo,endHour, endMinute, true);
+                timePickerDialog.show(getFragmentManager(),"Finish time");
+            }
+        });
+
         to.setTypeface(roboto_light);
         toTime.setTypeface(roboto_light);
 
@@ -113,6 +142,36 @@ public class EditIntervalActivity extends Activity {
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(new WeekAdapterWithCheckbox(this));
         listView.setClickable(false);
+        onTimeSetListenerFrom = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+                fromTime.setText(getStringTime(i*60 + i1));
+                beginHour = i;
+                beginMinute = i1;
+                if((beginHour * 60 + beginMinute) > (endHour * 60 + endMinute)){
+                    endHour = beginHour;
+                    endMinute = beginMinute;
+                }
+                sliderFrom.setValue(beginHour * 60 + beginMinute, true);
+                sliderTo.setValue(endHour*60 + endMinute, true);
+            }
+        };
+        onTimeSetListenerTo = new TimePickerDialog.OnTimeSetListener() {
+            @Override
+            public void onTimeSet(RadialPickerLayout radialPickerLayout, int i, int i1) {
+                toTime.setText(getStringTime(i*60 + i1));
+
+                endHour = i;
+                endMinute = i1;
+                if((beginHour * 60 + beginMinute) > (endHour * 60 + endMinute)){
+                    beginHour = endHour;
+                    beginMinute = endMinute;
+                }
+                sliderFrom.setValue(beginHour * 60 + beginMinute, true);
+                sliderTo.setValue(endHour*60 + endMinute, true);
+            }
+        };
+
 
         //Log.i("Check", "3");
     }

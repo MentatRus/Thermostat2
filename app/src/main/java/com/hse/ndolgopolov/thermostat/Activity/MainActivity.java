@@ -105,14 +105,14 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, DayActivity.class);
-                intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1);
+                intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK)%7);
                 startActivity(intent);
             }
         });
 
         listView = (ListView) findViewById(R.id.todayScheduleListView);
         // TODO pass today's schedule
-        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1];
+        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK)%7];
         listView.setAdapter(new DayAdapter(this, daySchedule));
 
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);

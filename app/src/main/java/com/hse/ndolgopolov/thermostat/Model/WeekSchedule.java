@@ -25,7 +25,7 @@ public class WeekSchedule{
     }
 
     boolean isHighTemperature(Calendar calendar) {
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK )-1;
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK )%7;
         //Log.i("Day_of_week", dayOfWeek+"");
         //Log.i("day of week includes time", String.valueOf(days[dayOfWeek].includesTime(calendar)));
         return days[dayOfWeek].includesTime(calendar);
