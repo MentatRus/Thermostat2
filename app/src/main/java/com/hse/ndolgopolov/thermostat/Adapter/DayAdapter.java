@@ -7,7 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
 import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
+
 import com.hse.ndolgopolov.thermostat.R;
 
 /**
@@ -24,12 +26,12 @@ public class DayAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return schedule.getIntervals().size();
+        return schedule.intervals.size();
     }
 
     @Override
     public Object getItem(int position) {
-        return schedule.getIntervals().get(position);
+        return schedule.intervals.get(position);
     }
 
     @Override

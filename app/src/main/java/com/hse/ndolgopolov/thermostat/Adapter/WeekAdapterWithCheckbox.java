@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
@@ -15,7 +17,7 @@ import com.hse.ndolgopolov.thermostat.R;
  */
 public class WeekAdapterWithCheckbox extends BaseAdapter {
     private Context context;
-
+    public boolean[] checkedDays = new boolean[]{false,false,false,false,false,false,false};
     public WeekAdapterWithCheckbox(Context context) {
         this.context = context;
     }
@@ -36,11 +38,22 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context).inflate(R.layout.single_element_with_checkbox, parent, false);
         }
-
+        com.rey.material.widget.CheckBox cb = (com.rey.material.widget.CheckBox)convertView.findViewById(R.id.checkBox);
+        cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if(isChecked){
+                    checkedDays[position] = true;
+                }
+                else {
+                    checkedDays[position] = false;
+                }
+            }
+        });
         TextView textView = (TextView) convertView.findViewById(R.id.dayTextView);
         textView.setText(Globals.weekDays[position]);
 
@@ -52,7 +65,7 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
 
     @Override
     public boolean isEnabled(int position) {
-        return false;
+        return !Globals.controller.weekSchedule.days[position].isFull();
     }
 
 

@@ -83,10 +83,10 @@ public class MainActivity extends ActionBarActivity {
             }
         });
         //TEST!!!
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(6);
-        controller.weekSchedule.addInterval(new Interval(2, 50, 3, 30),list);
-        updateFromController();
+//        ArrayList<Integer> list = new ArrayList<>();
+//        list.add(6);
+//        controller.weekSchedule.addInterval(new Interval(2, 50, 3, 30),list);
+//        updateFromController();
         final int minuteLength = 60000 / controller.timeScale;
         new Thread(new Runnable() {
             @Override

@@ -10,7 +10,7 @@ import java.util.*;
 public class WeekSchedule{
     public double highTemperature = 23;
     public double lowTemperature = 18.8;
-    DaySchedule[] days = new DaySchedule[7];
+    public DaySchedule[] days = new DaySchedule[7];
 
     public WeekSchedule() {
         for (int i = 0; i < 7; i++) {

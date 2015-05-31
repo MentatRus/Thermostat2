@@ -1,5 +1,7 @@
 package com.hse.ndolgopolov.thermostat.Model;
 
+import android.util.Log;
+
 import java.util.Calendar;
 
 /**
@@ -12,7 +14,7 @@ public class Controller {
     public boolean isPermanentlyOverriden = false;
     public boolean isDay = false;
     public int timeScale = 100;
-    public WeekSchedule weekSchedule;
+    public WeekSchedule weekSchedule = new WeekSchedule();
     public double desiredTemperature = 0;
     public double currentTemperature = 22;
     public double temperatureChangeSpeed = 0.05;
@@ -29,7 +31,6 @@ public class Controller {
         if (weekSchedule.isHighTemperature(fakeDate))
             scheduleTemperature = weekSchedule.highTemperature;
         else scheduleTemperature = weekSchedule.lowTemperature;
-        //Log.i("Scheduled temperature", scheduleTemperature+"");
         if(!isOverriden){
             desiredTemperature = scheduleTemperature;
             return;

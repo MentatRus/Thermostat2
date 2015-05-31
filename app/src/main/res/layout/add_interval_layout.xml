@@ -89,6 +89,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|right"
                 android:layout_margin="16dp"
+                android:onClick="clickAddInterval"
                 android:src="@drawable/ic_check"
                 fab:fab_colorNormal="@color/accent"
                 fab:fab_colorPressed="@color/accent_pressed"
