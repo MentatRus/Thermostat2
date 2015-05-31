@@ -59,7 +59,7 @@
             android:id="@+id/lockImageView"
             android:layout_below="@id/toolbar"
             android:background="@drawable/ic_lock_open"
-            android:layout_marginTop="127dp"
+            android:layout_marginTop="130dp"
             android:layout_marginLeft="10dp"
             android:layout_alignParentEnd="true"/>
 

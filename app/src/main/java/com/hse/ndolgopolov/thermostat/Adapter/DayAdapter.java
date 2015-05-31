@@ -1,5 +1,6 @@
 package com.hse.ndolgopolov.thermostat.Adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
@@ -7,9 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-
+import com.hse.ndolgopolov.thermostat.Activity.MainActivity;
 import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
-
 import com.hse.ndolgopolov.thermostat.R;
 
 /**
@@ -18,10 +18,18 @@ import com.hse.ndolgopolov.thermostat.R;
 public class DayAdapter extends BaseAdapter {
     private Context context;
     private DaySchedule schedule;
+    private boolean clickable;
 
     public DayAdapter(Context context, DaySchedule schedule) {
         this.context = context;
         this.schedule = schedule;
+
+        try {
+            Activity activity = (MainActivity) context;
+            clickable = false;
+        } catch (Exception e) {
+            clickable = true;
+        }
     }
 
     @Override
@@ -52,5 +60,10 @@ public class DayAdapter extends BaseAdapter {
         textView.setTypeface(roboto_light);
 
         return convertView;
+    }
+
+    @Override
+    public boolean isEnabled(int position) {
+        return clickable;
     }
 }
