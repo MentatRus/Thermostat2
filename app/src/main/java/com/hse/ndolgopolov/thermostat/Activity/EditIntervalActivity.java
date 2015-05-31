@@ -247,4 +247,12 @@ public class EditIntervalActivity extends Activity {
     public int getInterval() {
         return interval;
     }
+    public void clickFromButton(View v){
+        TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(onTimeSetListenerFrom, beginHour, beginMinute, true);
+        timePickerDialog.show(getFragmentManager(), "Start time");
+    }
+    public void clickToButton(View v){
+        TimePickerDialog timePickerDialog = TimePickerDialog.newInstance(onTimeSetListenerTo,endHour, endMinute, true);
+        timePickerDialog.show(getFragmentManager(),"Finish time");
+    }
 }
