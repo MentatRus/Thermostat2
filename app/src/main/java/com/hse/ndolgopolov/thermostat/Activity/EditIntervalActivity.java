@@ -28,6 +28,9 @@ public class EditIntervalActivity extends Activity {
     private int day;
     private int interval;
 
+    private Slider sliderFrom;
+    private Slider sliderTo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +39,7 @@ public class EditIntervalActivity extends Activity {
         init();
         //Log.i("Check", "4");
 
-        Slider sliderFrom = (Slider) findViewById(R.id.sliderFrom);
+        sliderFrom = (Slider) findViewById(R.id.sliderFrom);
         sliderFrom.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
             @Override
             public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
@@ -44,10 +47,14 @@ public class EditIntervalActivity extends Activity {
                 from.setText(getStringTime(i1));
                 beginHour = i1/60;
                 beginMinute = i1 %60;
+
+                if (i1 > sliderTo.getValue()) {
+                    sliderTo.setValue(i1, true);
+                }
             }
         });
 
-        Slider sliderTo = (Slider) findViewById(R.id.sliderTo);
+        sliderTo = (Slider) findViewById(R.id.sliderTo);
         sliderTo.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
             @Override
             public void onPositionChanged(Slider slider, boolean b, float v, float v1, int i, int i1) {
@@ -55,6 +62,10 @@ public class EditIntervalActivity extends Activity {
                 to.setText(getStringTime(i1));
                 endHour = i1/60;
                 endMinute = i1 % 60;
+
+                if (i1 < sliderFrom.getValue()) {
+                    sliderFrom.setValue(i1, true);
+                }
             }
         });
     }
