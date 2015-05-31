@@ -89,6 +89,7 @@ public class EditIntervalActivity extends Activity {
         toTime.setTypeface(roboto_light);
 
         deleteButton = (ButtonFlat) findViewById(R.id.deleteButton);
+
         newInterval = getIntent().getBooleanExtra("new", false);
         day = getIntent().getIntExtra("day", 0);
         interval = getIntent().getIntExtra("interval", 0);
@@ -101,6 +102,7 @@ public class EditIntervalActivity extends Activity {
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(new WeekAdapterWithCheckbox(this));
         listView.setClickable(false);
+
         //Log.i("Check", "3");
     }
 
@@ -108,15 +110,33 @@ public class EditIntervalActivity extends Activity {
         WeekAdapterWithCheckbox adapterWithCheckbox = (WeekAdapterWithCheckbox)listView.getAdapter();
 
         for (int i = 0; i < 7; i++){
-            if(adapterWithCheckbox.checkedDays[i]){
-                Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute, endHour, endMinute);
-                Log.i("Added to", i+"");
+            if(newInterval){
+                if(adapterWithCheckbox.checkedDays[i]){
+                    Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute, endHour, endMinute);
+                    Log.i("Added to", i+"");
+                }
+
+            }
+            else {
+                if(adapterWithCheckbox.checkedDays[i]){
+                    Globals.controller.weekSchedule.days[i].intervals.remove(interval);
+                    Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute, endHour, endMinute);
+                }
             }
         }
 
         finish();
     }
+    public void clickDelete(View V){
+        WeekAdapterWithCheckbox adapterWithCheckbox = (WeekAdapterWithCheckbox)listView.getAdapter();
+        for (int i = 0; i < 7; i++) {
+            if(adapterWithCheckbox.checkedDays[i]){
+                Globals.controller.weekSchedule.days[i].intervals.remove(interval);
+            }
 
+        }
+        finish();
+    }
     public boolean isNewInterval() {
         return newInterval;
     }
