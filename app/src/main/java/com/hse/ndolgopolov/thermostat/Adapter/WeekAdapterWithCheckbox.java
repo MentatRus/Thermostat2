@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import com.hse.ndolgopolov.thermostat.Activity.EditIntervalActivity;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 import com.rey.material.widget.CheckBox;
@@ -17,9 +18,11 @@ import com.rey.material.widget.CheckBox;
  */
 public class WeekAdapterWithCheckbox extends BaseAdapter {
     private Context context;
+    private EditIntervalActivity activity;
     public boolean[] checkedDays = new boolean[]{false,false,false,false,false,false,false};
     public WeekAdapterWithCheckbox(Context context) {
         this.context = context;
+        activity = (EditIntervalActivity) context;
     }
 
     @Override
@@ -45,7 +48,11 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
 
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
 
-        cb.setEnabled(!Globals.controller.weekSchedule.days[position].isFull());
+        if (activity.isNewInterval()) {
+            cb.setEnabled(!Globals.controller.weekSchedule.days[position].isFull());
+        } else {
+
+        }
 
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

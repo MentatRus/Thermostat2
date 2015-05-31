@@ -22,8 +22,11 @@ public class EditIntervalActivity extends Activity {
     private TextView fromTime;
     private TextView toTime;
     int beginHour = 0, beginMinute = 0, endHour = 0, endMinute = 0;
+
     private boolean newInterval;
     private ButtonFlat deleteButton;
+    private int day;
+    private int interval;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,6 +90,8 @@ public class EditIntervalActivity extends Activity {
 
         deleteButton = (ButtonFlat) findViewById(R.id.deleteButton);
         newInterval = getIntent().getBooleanExtra("new", false);
+        day = getIntent().getIntExtra("day", 0);
+        interval = getIntent().getIntExtra("interval", 0);
 
         if (newInterval) {
             deleteButton.setVisibility(View.GONE);
@@ -110,5 +115,17 @@ public class EditIntervalActivity extends Activity {
         }
 
         finish();
+    }
+
+    public boolean isNewInterval() {
+        return newInterval;
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public int getInterval() {
+        return interval;
     }
 }
