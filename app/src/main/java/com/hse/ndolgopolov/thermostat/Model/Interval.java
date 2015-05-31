@@ -38,9 +38,9 @@ public class Interval implements Comparable<Interval> {
 
         Interval interval = (Interval) o;
 
-        if (!begin.equals(interval.begin)) return false;
-        return end.equals(interval.end);
-
+//        if (!begin.equals(interval.begin)) return false;
+//        return end.equals(interval.end);
+        return toString().equals(interval.toString());
     }
 
     @Override

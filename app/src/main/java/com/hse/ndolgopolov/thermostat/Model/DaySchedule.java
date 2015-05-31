@@ -1,5 +1,7 @@
 package com.hse.ndolgopolov.thermostat.Model;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
@@ -48,6 +50,9 @@ public class DaySchedule {
 
     public boolean containsInterval(Interval interval) {
         for (Interval interval1 : intervals) {
+            Log.i("intervl", interval.toString());
+            Log.i("interval1", interval1.toString());
+            Log.i("equals", String.valueOf(interval1.equals(interval)));
             if (interval1.equals(interval)) return true;
         }
         return false;
