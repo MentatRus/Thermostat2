@@ -73,7 +73,7 @@
                 drakeet:color_pressed="#F44336"
                 android:background="@drawable/ic_plus"
                 drakeet:shape_type="round"
-                android:onClick="clickPlus"
+                onClick="clickPlus"
                 />
 
         <TextView
@@ -95,7 +95,7 @@
                 drakeet:color_pressed="#660303ff"
                 android:background="@drawable/ic_minus"
                 drakeet:shape_type="round"
-            android:onClick="clickMinus"
+            onClick="clickMinus"
             />
     </LinearLayout>
     <ListView
