@@ -46,6 +46,7 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
         CheckBox cb = (CheckBox) convertView.findViewById(R.id.checkBox);
 
         cb.setEnabled(!Globals.controller.weekSchedule.days[position].isFull());
+
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

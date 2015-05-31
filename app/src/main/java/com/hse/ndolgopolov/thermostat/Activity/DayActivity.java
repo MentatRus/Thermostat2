@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.DayAdapter;
@@ -21,6 +22,8 @@ public class DayActivity extends Activity {
     private ListView intervalsListView;
     private DayAdapter adapter;
     private FloatingActionButton button;
+    private int day;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,9 +34,16 @@ public class DayActivity extends Activity {
 
         //TODO: pass actual DaySchedule object
         Intent intent = getIntent();
-        int position = intent.getIntExtra("day", 0);
-        adapter = new DayAdapter(this, Globals.controller.weekSchedule.days[position]);
+        day = intent.getIntExtra("day", 0);
+        adapter = new DayAdapter(this, Globals.controller.weekSchedule.days[day]);
         intervalsListView.setAdapter(adapter);
+
+        intervalsListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                showEditIntervalActivity(day, position);
+            }
+        });
 
         titleTextView = (TextView) findViewById(R.id.dayTitleTextView);
         String day = getIntent().getExtras().getString("day");
@@ -54,6 +64,13 @@ public class DayActivity extends Activity {
     private void showNewIntervalActivity() {
         Intent intent = new Intent(this, EditIntervalActivity.class);
         intent.putExtra("new", true);
+        startActivity(intent);
+    }
+
+    private void showEditIntervalActivity(int day, int interval) {
+        Intent intent = new Intent(this, EditIntervalActivity.class);
+        intent.putExtra("day", day);
+        intent.putExtra("interval", interval);
         startActivity(intent);
     }
 
