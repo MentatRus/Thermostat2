@@ -97,8 +97,8 @@ public class EditIntervalActivity extends Activity {
         listView.setAdapter(new WeekAdapterWithCheckbox(this));
         listView.setClickable(false);
         //Log.i("Check", "3");
-
     }
+
     public void clickAddInterval(View V){
         WeekAdapterWithCheckbox adapterWithCheckbox = (WeekAdapterWithCheckbox)listView.getAdapter();
 

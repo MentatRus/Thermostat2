@@ -8,7 +8,6 @@ import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.DayAdapter;
-import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 import com.melnykov.fab.FloatingActionButton;
@@ -56,5 +55,12 @@ public class DayActivity extends Activity {
         Intent intent = new Intent(this, EditIntervalActivity.class);
         intent.putExtra("new", true);
         startActivity(intent);
+    }
+
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+
+        adapter.notifyDataSetChanged();
     }
 }
