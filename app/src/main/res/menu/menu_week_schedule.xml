@@ -11,9 +11,4 @@
           app:showAsAction="ifRoom"
           android:icon="@drawable/ic_cloud_upload"/>
 
-    <item android:id="@+id/action_save"
-          android:title="Save"
-          app:showAsAction="ifRoom"
-          android:icon="@drawable/ic_content_save"/>
-
 </menu>

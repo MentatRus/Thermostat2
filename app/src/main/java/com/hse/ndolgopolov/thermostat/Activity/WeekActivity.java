@@ -14,10 +14,13 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
+import com.hse.ndolgopolov.thermostat.Dialog.DownloadDialog;
 import com.hse.ndolgopolov.thermostat.Dialog.SetTemperatureDialog;
+import com.hse.ndolgopolov.thermostat.Dialog.UploadDialog;
 import com.hse.ndolgopolov.thermostat.Model.Controller;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
+import com.rey.material.widget.EditText;
 
 import java.lang.reflect.Field;
 
@@ -50,7 +53,7 @@ public class WeekActivity extends ActionBarActivity {
         changeTempButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showDialog();
+                showTemperatureDialog();
             }
         });
     }
@@ -61,7 +64,8 @@ public class WeekActivity extends ActionBarActivity {
         startActivity(intent);
     }
 
-    private void showDialog() {
+
+    private void showTemperatureDialog() {
         final SetTemperatureDialog dialog = new SetTemperatureDialog(this);
         dialog.show();
 
@@ -84,6 +88,33 @@ public class WeekActivity extends ActionBarActivity {
         });
     }
 
+    private void showDownloadDialog() {
+        final DownloadDialog dialog = new DownloadDialog(this);
+        dialog.show();
+
+        dialog.getPositiveButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                dialog.cancel();
+            }
+        });
+    }
+
+    private void showUploadDialog() {
+        final UploadDialog dialog = new UploadDialog(this);
+        dialog.show();
+
+        dialog.getPositiveButton().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                EditText editText = (EditText) dialog.findViewById(R.id.editText);
+                String name = editText.getText().toString();
+
+                dialog.cancel();
+            }
+        });
+    }
 
     private void init() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -136,10 +167,12 @@ public class WeekActivity extends ActionBarActivity {
 
         switch (id) {
             case R.id.action_upload: {
+                showUploadDialog();
                 break;
             }
 
-            case R.id.action_save: {
+            case R.id.action_download: {
+                showDownloadDialog();
                 break;
             }
         }
