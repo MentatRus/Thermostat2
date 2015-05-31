@@ -6,8 +6,8 @@ import java.util.Calendar;
  * Created by Nickolay Dolgopolov on 30.05.2015.
  */
 public class Interval implements Comparable<Interval> {
-    Calendar begin;
-    Calendar end;
+    public Calendar begin;
+    public Calendar end;
 
     public Interval(int h1, int m1, int h2, int m2) {
         begin = Calendar.getInstance();

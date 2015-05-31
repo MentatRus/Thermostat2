@@ -13,6 +13,8 @@ import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 import com.rey.material.widget.Slider;
 
+import java.util.Calendar;
+
 /**
  * Created by Igor on 30.05.2015.
  */
@@ -38,6 +40,7 @@ public class EditIntervalActivity extends Activity {
         //Log.i("Check", "1");
         init();
         //Log.i("Check", "4");
+
 
         sliderFrom = (Slider) findViewById(R.id.sliderFrom);
         sliderFrom.setOnPositionChangeListener(new Slider.OnPositionChangeListener() {
@@ -68,6 +71,11 @@ public class EditIntervalActivity extends Activity {
                 }
             }
         });
+
+        if (!newInterval) {
+            sliderFrom.setValue(getBeginHour() * 60 + getBeginMinute(), true);
+            sliderTo.setValue(getEndHour() * 60 + getEndMinute(), true);
+        }
     }
 
     private String getStringTime(int i) {
@@ -80,6 +88,22 @@ public class EditIntervalActivity extends Activity {
         result += hour + ":" + minute;
 
         return result;
+    }
+
+    private int getBeginHour() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).begin.get(Calendar.HOUR_OF_DAY);
+    }
+
+    private int getBeginMinute() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).begin.get(Calendar.MINUTE);
+    }
+
+    private int getEndHour() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).end.get(Calendar.HOUR_OF_DAY);
+    }
+
+    private int getEndMinute() {
+        return Globals.controller.weekSchedule.days[day].intervals.get(interval).end.get(Calendar.MINUTE);
     }
 
     private void init() {

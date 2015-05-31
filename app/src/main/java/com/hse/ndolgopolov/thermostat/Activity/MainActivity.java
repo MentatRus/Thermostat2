@@ -135,9 +135,11 @@ public class MainActivity extends ActionBarActivity {
         plusButton.setOnTouchListener(new RepeatListener(400, 30, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.desiredTemperature += 0.1;
-                controller.isOverriden = true;
-                updateFromController();
+                if (controller.desiredTemperature < 30) {
+                    controller.desiredTemperature += 0.1;
+                    controller.isOverriden = true;
+                    updateFromController();
+                }
             }
         }));
 
@@ -145,9 +147,11 @@ public class MainActivity extends ActionBarActivity {
         minusButton.setOnTouchListener(new RepeatListener(400, 30, new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                controller.desiredTemperature -= 0.1;
-                controller.isOverriden = true;
-                updateFromController();
+                if (controller.desiredTemperature > 5) {
+                    controller.desiredTemperature -= 0.1;
+                    controller.isOverriden = true;
+                    updateFromController();
+                }
             }
         }));
 
