@@ -43,7 +43,7 @@ public class WeekActivity extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String day = Globals.weekDays[position];
-                showDayActivity(day);
+                showDayActivity(position);
             }
         });
 
@@ -55,7 +55,7 @@ public class WeekActivity extends ActionBarActivity {
         });
     }
 
-    private void showDayActivity(String day) {
+    private void showDayActivity(int day) {
         Intent intent = new Intent(this, DayActivity.class);
         intent.putExtra("day", day);
         startActivity(intent);

@@ -9,6 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.DayAdapter;
 import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
+import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -30,7 +31,9 @@ public class DayActivity extends Activity {
         intervalsListView = (ListView) findViewById(R.id.intervalsListView);
 
         //TODO: pass actual DaySchedule object
-        adapter = new DayAdapter(this, new DaySchedule());
+        Intent intent = getIntent();
+        int position = intent.getIntExtra("day", 0);
+        adapter = new DayAdapter(this, Globals.controller.weekSchedule.days[position]);
         intervalsListView.setAdapter(adapter);
 
         titleTextView = (TextView) findViewById(R.id.dayTitleTextView);
