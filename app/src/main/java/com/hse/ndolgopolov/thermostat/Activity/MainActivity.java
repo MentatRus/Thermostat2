@@ -87,6 +87,7 @@ public class MainActivity extends ActionBarActivity {
     Controller controller = Globals.controller;
     ListView listView;
     UIButton editButton;
+    ImageView imageViewTemperature;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +121,7 @@ public class MainActivity extends ActionBarActivity {
         targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
         schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
         fakeDate = (TextView)findViewById(R.id.fakeDate);
+        imageViewTemperature = (ImageView)findViewById(R.id.imageView3);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
         Typeface roboto_bold = Typeface.createFromAsset(this.getAssets(), "Roboto-Bold.ttf");
@@ -264,7 +266,34 @@ public class MainActivity extends ActionBarActivity {
         fakeDate.post(new Runnable() {
             @Override
             public void run() {
-                fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+                //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));S
+                String res= Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)] + ", ";
+                String h = String.valueOf(controller.fakeDate.get(Calendar.HOUR_OF_DAY));
+                res += ((h.length() < 2 ? "0" + h : h) + ":");
+                String m = String.valueOf(controller.fakeDate.get(Calendar.MINUTE));
+                res += (m.length() < 2 ? "0" + m : m);
+                fakeDate.setText(res);
+
+
+            }
+        });
+
+        imageViewTemperature.post(new Runnable() {
+            @Override
+            public void run() {
+                if(controller.isOverriden){
+                    imageViewTemperature.setImageResource(R.drawable.account);
+
+                    return;
+                }
+                if(controller.isDay){
+                    imageViewTemperature.setImageResource(R.drawable.ic_day);
+
+                    return;
+                }
+                imageViewTemperature.setImageResource(R.drawable.ic_night);
+
+
             }
         });
         //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY)+ ":"+controller.fakeDate.get(Calendar.MINUTE));

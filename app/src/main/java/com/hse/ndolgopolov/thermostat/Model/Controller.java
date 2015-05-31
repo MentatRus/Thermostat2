@@ -13,7 +13,7 @@ public class Controller {
     public boolean isOverriden = false;
     public boolean isPermanentlyOverriden = false;
     public boolean isDay = false;
-    public int timeScale = 100;
+    public int timeScale = 300;
     public WeekSchedule weekSchedule = new WeekSchedule();
     public double desiredTemperature = 0;
     public double currentTemperature = 22;
