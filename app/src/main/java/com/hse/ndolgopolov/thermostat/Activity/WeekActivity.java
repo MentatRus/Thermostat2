@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
@@ -30,7 +29,6 @@ public class WeekActivity extends ActionBarActivity {
 
     private TextView dayTempTextView;
     private TextView nightTempTextView;
-    private Button changeTempButton;
     private Controller controller = Globals.controller;
     private ListView listView;
     private double dayTemp, nightTemp;
@@ -49,12 +47,6 @@ public class WeekActivity extends ActionBarActivity {
             }
         });
 
-        changeTempButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showTemperatureDialog();
-            }
-        });
     }
 
     private void showDayActivity(int day) {
@@ -142,7 +134,12 @@ public class WeekActivity extends ActionBarActivity {
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
 
-        changeTempButton = (Button) findViewById(R.id.changeTemperatureButton);
+        temperatureTitle.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTemperatureDialog();
+            }
+        });
 
         listView = (ListView) findViewById(R.id.weekListView);
         WeekAdapter adapter = new WeekAdapter(this);

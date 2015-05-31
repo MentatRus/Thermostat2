@@ -1,6 +1,7 @@
 package com.hse.ndolgopolov.thermostat.Activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -88,6 +89,7 @@ public class MainActivity extends ActionBarActivity {
     ListView listView;
     UIButton editButton;
     ImageView imageViewTemperature;
+    DayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,20 +103,11 @@ public class MainActivity extends ActionBarActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        editButton = (UIButton) findViewById(R.id.editButton);
-        editButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(thisActivity, DayActivity.class);
-                intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK)%7);
-                startActivity(intent);
-            }
-        });
-
         listView = (ListView) findViewById(R.id.todayScheduleListView);
         // TODO pass today's schedule
         DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK)%7];
-        listView.setAdapter(new DayAdapter(this, daySchedule));
+        adapter = new DayAdapter(this, daySchedule);
+        listView.setAdapter(adapter);
 
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
@@ -132,6 +125,15 @@ public class MainActivity extends ActionBarActivity {
         schedule.setTypeface(roboto_light);
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
+
+        schedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(thisActivity, DayActivity.class);
+                intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK) % 7);
+                startActivity(intent);
+            }
+        });
 
         UIButton plusButton = (UIButton)findViewById(R.id.plusButton);
         plusButton.setOnTouchListener(new RepeatListener(400, 30, new View.OnClickListener() {
@@ -282,16 +284,15 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void run() {
                 if(controller.isOverriden){
-                    imageViewTemperature.setImageResource(R.drawable.account);
-
+                    imageViewTemperature.setBackgroundResource(Color.parseColor("#00000000"));
                     return;
                 }
                 if(controller.isDay){
-                    imageViewTemperature.setImageResource(R.drawable.ic_day);
+                    imageViewTemperature.setBackgroundResource(R.drawable.ic_day);
 
                     return;
                 }
-                imageViewTemperature.setImageResource(R.drawable.ic_night);
+                imageViewTemperature.setBackgroundResource(R.drawable.ic_night);
 
 
             }
@@ -301,8 +302,11 @@ public class MainActivity extends ActionBarActivity {
         //Log.i("Update",controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
 
     }
-    public void clickSchedule(View V){
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        adapter.notifyDataSetChanged();
     }
 }
 

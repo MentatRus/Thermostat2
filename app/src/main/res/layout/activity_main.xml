@@ -126,16 +126,11 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Schedule for today"
+                android:background="@drawable/shape"
+                android:textColor="@color/accent"
             android:id="@+id/scheduleLabelTextView"
                 android:textSize="35dp"/>
 
-        <me.drakeet.library.UIButton
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:id="@+id/editButton"
-                android:layout_marginLeft="10dp"
-                android:background="@drawable/ic_edit"
-                drakeet:color_pressed="#660303ff" android:layout_marginTop="-5dp"/>
     </LinearLayout>
 
 
