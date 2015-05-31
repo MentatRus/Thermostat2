@@ -1,13 +1,13 @@
 package com.hse.ndolgopolov.thermostat.Activity;
 
 import android.app.Activity;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.gc.materialdesign.views.ButtonFlat;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapterWithCheckbox;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
@@ -21,7 +21,10 @@ public class EditIntervalActivity extends Activity {
     private ListView listView;
     private TextView fromTime;
     private TextView toTime;
-    int beginHour =0, beginMinute = 0, endHour = 0, endMinute = 0;
+    int beginHour = 0, beginMinute = 0, endHour = 0, endMinute = 0;
+    private boolean newInterval;
+    private ButtonFlat deleteButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,6 +85,14 @@ public class EditIntervalActivity extends Activity {
         to.setTypeface(roboto_light);
         toTime.setTypeface(roboto_light);
 
+        deleteButton = (ButtonFlat) findViewById(R.id.deleteButton);
+        newInterval = getIntent().getBooleanExtra("new", false);
+
+        if (newInterval) {
+            deleteButton.setVisibility(View.GONE);
+            title.setText("New interval");
+        }
+
         listView = (ListView) findViewById(R.id.listView);
         listView.setAdapter(new WeekAdapterWithCheckbox(this));
         listView.setClickable(false);
@@ -91,14 +102,13 @@ public class EditIntervalActivity extends Activity {
     public void clickAddInterval(View V){
         WeekAdapterWithCheckbox adapterWithCheckbox = (WeekAdapterWithCheckbox)listView.getAdapter();
 
-
         for (int i = 0; i < 7; i++){
             if(adapterWithCheckbox.checkedDays[i]){
-                Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute,endHour,endMinute);
+                Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute, endHour, endMinute);
                 Log.i("Added to", i+"");
             }
         }
-        Intent intent = new Intent(this, WeekActivity.class);
-        startActivity(intent);
+
+        finish();
     }
 }

@@ -9,7 +9,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="New interval"
+            android:text="Edit interval"
             android:id="@+id/titleTextView" android:layout_gravity="center_horizontal" android:textSize="50dp"
             android:layout_marginTop="35dp"/>
         <RelativeLayout
@@ -83,6 +83,19 @@
                 android:layout_gravity="center_horizontal"
                 android:divider="@null"/>
 
+    <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent" android:gravity="right">
+
+        <com.gc.materialdesign.views.ButtonFlat
+                android:id="@+id/deleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="#ffe50600"
+                android:text="Delete interval"
+                android:layout_gravity="center_vertical" android:layout_marginRight="40dp"/>
+
         <com.melnykov.fab.FloatingActionButton
                 android:id="@+id/fab"
                 android:layout_width="wrap_content"
@@ -94,5 +107,6 @@
                 fab:fab_colorNormal="@color/accent"
                 fab:fab_colorPressed="@color/accent_pressed"
                 fab:fab_colorRipple="@color/ripple"/>
+    </LinearLayout>
 
 </LinearLayout>
