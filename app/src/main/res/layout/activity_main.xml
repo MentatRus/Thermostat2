@@ -59,7 +59,7 @@
             android:id="@+id/lockImageView"
             android:layout_below="@id/toolbar"
             android:background="@drawable/ic_lock_open"
-            android:layout_marginTop="152dp"
+            android:layout_marginTop="127dp"
             android:layout_marginLeft="10dp"
             android:layout_alignParentEnd="true"/>
 
@@ -71,7 +71,7 @@
         android:id="@+id/linearLayout"
         android:layout_below="@+id/toolbar"
         android:layout_toLeftOf="@id/lockImageView"
-        android:layout_marginTop="100dp" android:layout_marginLeft="20dp">
+        android:layout_marginTop="80dp" android:layout_marginLeft="20dp">
 
 
         <me.drakeet.library.UIButton
@@ -112,18 +112,31 @@
             android:layout_width="wrap_content"
             android:layout_height="200dp"
             android:id="@+id/todayScheduleListView"
-
+            android:divider="@null"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
 
-    <TextView
+    <LinearLayout
+            android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Today&apos;s schedule"
+            android:layout_above="@+id/todayScheduleListView" android:layout_centerHorizontal="true">
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Schedule for today"
             android:id="@+id/scheduleLabelTextView"
-            android:layout_above="@+id/todayScheduleListView"
-            android:layout_centerHorizontal="true"/>
+                android:textSize="35dp"/>
+
+        <me.drakeet.library.UIButton
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:id="@+id/editButton"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/ic_edit"
+                drakeet:color_pressed="#660303ff" android:layout_marginTop="-5dp"/>
+    </LinearLayout>
 
 
 </RelativeLayout>

@@ -9,7 +9,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -18,6 +17,7 @@ import com.hse.ndolgopolov.thermostat.Model.Controller;
 import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
+import me.drakeet.library.UIButton;
 
 import java.lang.reflect.Field;
 import java.util.Calendar;
@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
     TextView fakeDate;
     Controller controller = Globals.controller;
     ListView listView;
-    //private boolean locked = false;
+    private UIButton editButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,14 +51,17 @@ public class MainActivity extends ActionBarActivity {
         // TODO pass today's schedule
         DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1];
         listView.setAdapter(new DayAdapter(this, daySchedule));
-        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+        editButton = (UIButton) findViewById(R.id.editButton);
+        editButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+            public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, DayActivity.class);
                 intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1);
                 startActivity(intent);
             }
         });
+
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
         targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
@@ -190,9 +193,6 @@ public class MainActivity extends ActionBarActivity {
         //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
 
         //Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
-
-    }
-    public void clickSchedule(View V){
 
     }
 }
