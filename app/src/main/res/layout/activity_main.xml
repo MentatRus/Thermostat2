@@ -26,7 +26,7 @@
             android:layout_width="20dp"
             android:layout_height="20dp"
             android:id="@+id/imageView3"
-            android:background="@drawable/ic_day"
+            android:background="@drawable/ic_night"
             android:layout_below="@id/currentTemperatureTextView" android:layout_marginLeft="30dp"
             android:layout_marginTop="3dp"/>
 
