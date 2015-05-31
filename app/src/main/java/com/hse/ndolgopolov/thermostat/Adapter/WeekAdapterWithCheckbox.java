@@ -1,7 +1,6 @@
 package com.hse.ndolgopolov.thermostat.Adapter;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -57,10 +56,12 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
             Interval interval = Globals.controller.weekSchedule.days[activity.getDay()].intervals.get(activity.getInterval());
             cb.setEnabled(Globals.controller.weekSchedule.days[position].containsInterval(interval));
         }
-        if(position == activity.getDay()){
+
+        if (cb.isEnabled() && position == activity.getDay()) {
             cb.setCheckedImmediately(true);
             checkedDays[position] = true;
         }
+
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
