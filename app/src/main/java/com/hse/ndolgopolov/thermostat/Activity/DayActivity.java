@@ -46,6 +46,7 @@ public class DayActivity extends Activity {
         });
 
         titleTextView = (TextView) findViewById(R.id.dayTitleTextView);
+        //String day = getIntent().getExtras().getString("day");
         titleTextView.setText(Globals.weekDays[day]);
 
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
@@ -63,6 +64,7 @@ public class DayActivity extends Activity {
     private void showNewIntervalActivity() {
         Intent intent = new Intent(this, EditIntervalActivity.class);
         intent.putExtra("new", true);
+        intent.putExtra("day", day);
         startActivity(intent);
     }
 

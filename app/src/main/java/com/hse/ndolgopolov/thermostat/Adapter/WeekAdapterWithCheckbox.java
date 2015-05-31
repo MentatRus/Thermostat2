@@ -57,7 +57,10 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
             Interval interval = Globals.controller.weekSchedule.days[activity.getDay()].intervals.get(activity.getInterval());
             cb.setEnabled(Globals.controller.weekSchedule.days[position].containsInterval(interval));
         }
-
+        if(position == activity.getDay()){
+            cb.setCheckedImmediately(true);
+            checkedDays[position] = true;
+        }
         cb.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {

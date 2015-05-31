@@ -90,6 +90,7 @@
 
         <com.gc.materialdesign.views.ButtonFlat
                 android:id="@+id/deleteButton"
+                android:onClick="clickDelete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="#ffe50600"
