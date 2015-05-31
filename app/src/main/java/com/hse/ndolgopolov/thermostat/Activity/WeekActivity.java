@@ -31,6 +31,7 @@ public class WeekActivity extends ActionBarActivity {
     private Button changeTempButton;
     private Controller controller = Globals.controller;
     private ListView listView;
+    private double dayTemp, nightTemp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,6 @@ public class WeekActivity extends ActionBarActivity {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String day = Globals.weekDays[position];
                 showDayActivity(position);
             }
         });
@@ -69,13 +69,13 @@ public class WeekActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 TextView dayTextView = (TextView) dialog.findViewById(R.id.dayTemperatureTextView);
-                double dayTemp = Double.parseDouble(dayTextView.getText().toString());
+                dayTemp = Double.parseDouble(dayTextView.getText().toString());
 
                 //dayTempTextView.setText(dayTemp + "");
                 controller.weekSchedule.highTemperature = dayTemp;
 
                 TextView nightTextView = (TextView) dialog.findViewById(R.id.nightTemperatureTextView);
-                double nightTemp = Double.parseDouble(nightTextView.getText().toString());
+                nightTemp = Double.parseDouble(nightTextView.getText().toString());
                 //nightTempTextView.setText(nightTemp + "");
                 controller.weekSchedule.lowTemperature = nightTemp;
                 updateFromController();
@@ -96,6 +96,9 @@ public class WeekActivity extends ActionBarActivity {
         TextView temperatureTitle = (TextView) findViewById(R.id.temperatureTitleTextView);
         TextView scheduleTitle = (TextView) findViewById(R.id.scheduleTitleTextView);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
+
+        dayTempTextView.setText(Globals.controller.weekSchedule.highTemperature + "");
+        nightTempTextView.setText(Globals.controller.weekSchedule.lowTemperature + "");
 
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
         Typeface roboto_bold = Typeface.createFromAsset(this.getAssets(), "Roboto-Bold.ttf");
@@ -159,5 +162,13 @@ public class WeekActivity extends ActionBarActivity {
     void updateFromController(){
         dayTempTextView.setText(String.format("%.1f",controller.weekSchedule.highTemperature));
         nightTempTextView.setText(String.format("%.1f",controller.weekSchedule.lowTemperature));
+    }
+
+    public double getDayTemp() {
+        return dayTemp;
+    }
+
+    public double getNightTemp() {
+        return nightTemp;
     }
 }
