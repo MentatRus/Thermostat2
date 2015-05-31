@@ -53,6 +53,16 @@
         android:layout_marginLeft="5dp"/>
 
 
+    <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:id="@+id/lockImageView"
+            android:layout_below="@id/toolbar"
+            android:background="@drawable/ic_lock_open"
+            android:layout_marginTop="152dp"
+            android:layout_marginLeft="10dp"
+            android:layout_alignParentEnd="true"/>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -60,7 +70,7 @@
         android:gravity="center"
         android:id="@+id/linearLayout"
         android:layout_below="@+id/toolbar"
-        android:layout_toRightOf="@id/currentTemperatureTextView"
+        android:layout_toLeftOf="@id/lockImageView"
         android:layout_marginTop="100dp" android:layout_marginLeft="20dp">
 
 
@@ -100,7 +110,7 @@
     </LinearLayout>
     <ListView
             android:layout_width="wrap_content"
-            android:layout_height="130dp"
+            android:layout_height="200dp"
             android:id="@+id/todayScheduleListView"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
@@ -113,14 +123,6 @@
             android:id="@+id/scheduleLabelTextView"
             android:layout_above="@+id/todayScheduleListView"
             android:layout_centerHorizontal="true"/>
-    <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:id="@+id/lockImageView"
-            android:layout_below="@id/toolbar"
-            android:layout_toRightOf="@id/linearLayout"
-            android:background="@drawable/ic_lock_open"
-            android:layout_marginTop="152dp" android:layout_marginLeft="10dp"/>
 
 
 </RelativeLayout>
