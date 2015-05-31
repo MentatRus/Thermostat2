@@ -87,6 +87,7 @@ public class MainActivity extends ActionBarActivity {
     Controller controller = Globals.controller;
     ListView listView;
     UIButton editButton;
+    DayAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +114,8 @@ public class MainActivity extends ActionBarActivity {
         listView = (ListView) findViewById(R.id.todayScheduleListView);
         // TODO pass today's schedule
         DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK)%7];
-        listView.setAdapter(new DayAdapter(this, daySchedule));
+        adapter = new DayAdapter(this, daySchedule);
+        listView.setAdapter(adapter);
 
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
@@ -272,8 +274,11 @@ public class MainActivity extends ActionBarActivity {
         //Log.i("Update",controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
 
     }
-    public void clickSchedule(View V){
 
+    @Override
+    protected void onPostResume() {
+        super.onPostResume();
+        adapter.notifyDataSetChanged();
     }
 }
 
