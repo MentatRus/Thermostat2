@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -23,7 +24,7 @@ import java.util.Calendar;
 
 
 public class MainActivity extends ActionBarActivity {
-
+    MainActivity thisActivity = this;
     TextView currTemp;
     TextView currTempLabel;
     TextView targetTemp;
@@ -50,14 +51,20 @@ public class MainActivity extends ActionBarActivity {
         // TODO pass today's schedule
         DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1];
         listView.setAdapter(new DayAdapter(this, daySchedule));
-
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(thisActivity, DayActivity.class);
+                intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1);
+                startActivity(intent);
+            }
+        });
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
         targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
         schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
         fakeDate = (TextView)findViewById(R.id.fakeDate);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
-
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
         Typeface roboto_bold = Typeface.createFromAsset(this.getAssets(), "Roboto-Bold.ttf");
 
@@ -183,6 +190,9 @@ public class MainActivity extends ActionBarActivity {
         //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
 
         //Log.i("Update",controller.fakeDate.get(Calendar.HOUR) + ":" + controller.fakeDate.get(Calendar.MINUTE));
+
+    }
+    public void clickSchedule(View V){
 
     }
 }
