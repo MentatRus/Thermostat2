@@ -10,21 +10,15 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
-import com.hse.ndolgopolov.thermostat.Model.Globals;
-
-import com.hse.ndolgopolov.thermostat.Model.Interval;
-import com.hse.ndolgopolov.thermostat.R;
-
-import java.lang.reflect.Field;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-
+import com.hse.ndolgopolov.thermostat.Adapter.DayAdapter;
 import com.hse.ndolgopolov.thermostat.Model.Controller;
+import com.hse.ndolgopolov.thermostat.Model.DaySchedule;
+import com.hse.ndolgopolov.thermostat.Model.Globals;
 import com.hse.ndolgopolov.thermostat.R;
 
 import java.lang.reflect.Field;
-
 import java.util.Calendar;
 
 
@@ -36,6 +30,7 @@ public class MainActivity extends ActionBarActivity {
     TextView schedule;
     TextView fakeDate;
     Controller controller = Globals.controller;
+    ListView listView;
     //private boolean locked = false;
 
     @Override
@@ -50,6 +45,10 @@ public class MainActivity extends ActionBarActivity {
     private void init() {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
+
+        listView = (ListView) findViewById(R.id.todayScheduleListView);
+        // TODO pass today's schedule
+        listView.setAdapter(new DayAdapter(this, new DaySchedule()));
 
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);

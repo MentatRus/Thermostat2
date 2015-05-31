@@ -52,6 +52,7 @@ public class WeekAdapterWithCheckbox extends BaseAdapter {
 
         if (activity.isNewInterval()) {
             cb.setEnabled(!Globals.controller.weekSchedule.days[position].isFull());
+
         } else {
             Interval interval = Globals.controller.weekSchedule.days[activity.getDay()].intervals.get(activity.getInterval());
             cb.setEnabled(Globals.controller.weekSchedule.days[position].containsInterval(interval));
