@@ -26,8 +26,8 @@ import java.util.Calendar;
 public class EditIntervalActivity extends Activity {
 
     private ListView listView;
-    private TextView fromTime;
-    private TextView toTime;
+    private com.rey.material.widget.Button fromTime;
+    private com.rey.material.widget.Button toTime;
     int beginHour = 0, beginMinute = 0, endHour = 0, endMinute = 0;
 
     private boolean newInterval;
@@ -132,9 +132,9 @@ public class EditIntervalActivity extends Activity {
 
         TextView title = (TextView) findViewById(R.id.titleTextView);
         TextView from = (TextView) findViewById(R.id.fromTextView);
-        fromTime = (TextView) findViewById(R.id.fromTimeTextView);
+        fromTime = (com.rey.material.widget.Button) findViewById(R.id.fromTimeTextView);
         TextView to = (TextView) findViewById(R.id.toTextView);
-        toTime = (TextView) findViewById(R.id.toTimeTextView);
+        toTime = (com.rey.material.widget.Button) findViewById(R.id.toTimeTextView);
 
         title.setTypeface(roboto_light);
         from.setTypeface(roboto_light);

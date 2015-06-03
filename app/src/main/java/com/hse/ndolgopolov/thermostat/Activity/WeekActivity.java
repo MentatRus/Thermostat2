@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapter;
@@ -27,8 +28,10 @@ import java.lang.reflect.Field;
  */
 public class WeekActivity extends ActionBarActivity {
 
-    private TextView dayTempTextView;
-    private TextView nightTempTextView;
+    //private TextView dayTempTextView;
+    //private TextView nightTempTextView;
+    com.rey.material.widget.Button dayButton;
+    com.rey.material.widget.Button nightButton;
     private Controller controller = Globals.controller;
     private ListView listView;
     private double dayTemp, nightTemp;
@@ -111,30 +114,38 @@ public class WeekActivity extends ActionBarActivity {
         Toolbar mToolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(mToolbar);
 
-        dayTempTextView = (TextView) findViewById(R.id.dayTemperatureTextView);
+        dayButton = (com.rey.material.widget.Button) findViewById(R.id.button_day);
         TextView dayTempTitle = (TextView) findViewById(R.id.dayTitleTextView);
-        nightTempTextView = (TextView) findViewById(R.id.nightTemperatureTextView);
-        TextView nightTempTitle = (TextView) findViewById(R.id.nightTitleTextView);
-        TextView temperatureTitle = (TextView) findViewById(R.id.temperatureTitleTextView);
+        nightButton  = (com.rey.material.widget.Button) findViewById(R.id.button_night);
+        //TextView nightTempTitle = (TextView) findViewById(R.id.nightTitleTextView);
+        //com.gc.materialdesign.views.ButtonRectangle temperatureTitle = (com.gc.materialdesign.views.ButtonRectangle) findViewById(R.id.TemperatureButton);
         TextView scheduleTitle = (TextView) findViewById(R.id.scheduleTitleTextView);
+        TextView temperatureTitle = (TextView)findViewById(R.id.temperatureTextView);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
 
-        dayTempTextView.setText(Globals.controller.weekSchedule.highTemperature + "");
-        nightTempTextView.setText(Globals.controller.weekSchedule.lowTemperature + "");
+        dayButton.setText(Globals.controller.weekSchedule.highTemperature + "");
+        nightButton.setText(Globals.controller.weekSchedule.lowTemperature + "");
 
         Typeface roboto_light = Typeface.createFromAsset(this.getAssets(), "Roboto-Light.ttf");
         Typeface roboto_bold = Typeface.createFromAsset(this.getAssets(), "Roboto-Bold.ttf");
 
-        dayTempTextView.setTypeface(roboto_light);
-        dayTempTitle.setTypeface(roboto_light);
-        temperatureTitle.setTypeface(roboto_light);
+        //dayTempTextView.setTypeface(roboto_light);
+//        dayTempTitle.setTypeface(roboto_light);
+        //temperatureTitle.setTypeface(roboto_light);
         scheduleTitle.setTypeface(roboto_light);
-        nightTempTextView.setTypeface(roboto_light);
-        nightTempTitle.setTypeface(roboto_light);
+        temperatureTitle.setTypeface(roboto_light);
+        //nightTempTextView.setTypeface(roboto_light);
+        //nightTempTitle.setTypeface(roboto_light);
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
 
-        temperatureTitle.setOnClickListener(new View.OnClickListener() {
+        dayButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTemperatureDialog();
+            }
+        });
+        nightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showTemperatureDialog();
@@ -175,8 +186,8 @@ public class WeekActivity extends ActionBarActivity {
         return titleTextView;
     }
     void updateFromController(){
-        dayTempTextView.setText(String.format("%.1f",controller.weekSchedule.highTemperature));
-        nightTempTextView.setText(String.format("%.1f",controller.weekSchedule.lowTemperature));
+        dayButton.setText(String.format("%.1f",controller.weekSchedule.highTemperature));
+        nightButton.setText(String.format("%.1f",controller.weekSchedule.lowTemperature));
     }
 
 

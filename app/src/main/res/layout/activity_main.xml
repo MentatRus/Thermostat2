@@ -115,14 +115,22 @@
             android:divider="@null"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"/>
-
+    <com.rey.material.widget.Button
+        android:id="@+id/ScheduleButton"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/todayScheduleListView"
+        android:text="Schedule for today"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textSize="30sp"/>
+<!--
     <LinearLayout
             android:orientation="horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/todayScheduleListView" android:layout_centerHorizontal="true">
         <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="Schedule for today"
@@ -132,6 +140,8 @@
                 android:textSize="35dp"/>
 
     </LinearLayout>
+-->
+
 
 
 </RelativeLayout>
