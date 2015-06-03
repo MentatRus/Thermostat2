@@ -83,7 +83,7 @@ public class MainActivity extends ActionBarActivity {
     TextView currTemp;
     TextView currTempLabel;
     TextView targetTemp;
-    TextView schedule;
+    com.rey.material.widget.Button schedule;
     TextView fakeDate;
     Controller controller = Globals.controller;
     ListView listView;
@@ -112,7 +112,7 @@ public class MainActivity extends ActionBarActivity {
         currTemp = (TextView) findViewById(R.id.currentTemperatureTextView);
         currTempLabel = (TextView) findViewById(R.id.currentTemperatureLabelTextView);
         targetTemp = (TextView) findViewById(R.id.targetTemperatureTextView);
-        schedule = (TextView) findViewById(R.id.scheduleLabelTextView);
+        schedule = (com.rey.material.widget.Button) findViewById(R.id.ScheduleButton);
         fakeDate = (TextView)findViewById(R.id.fakeDate);
         imageViewTemperature = (ImageView)findViewById(R.id.imageView3);
         TextView toolbarTextView = getActionBarTextView(mToolbar);
@@ -122,7 +122,7 @@ public class MainActivity extends ActionBarActivity {
         currTemp.setTypeface(roboto_light);
         currTempLabel.setTypeface(roboto_light);
         targetTemp.setTypeface(roboto_light);
-        schedule.setTypeface(roboto_light);
+        //schedule.setTypeface(roboto_light);
         toolbarTextView.setTypeface(roboto_bold);
         toolbarTextView.setTextSize(20);
 
@@ -295,6 +295,12 @@ public class MainActivity extends ActionBarActivity {
                 imageViewTemperature.setBackgroundResource(R.drawable.ic_night);
 
 
+            }
+        });
+        schedule.post(new Runnable() {
+            @Override
+            public void run() {
+                schedule.setText("Schedule for " + Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)]);
             }
         });
         //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY)+ ":"+controller.fakeDate.get(Calendar.MINUTE));

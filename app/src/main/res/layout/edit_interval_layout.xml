@@ -11,28 +11,38 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Edit interval"
             android:id="@+id/titleTextView" android:layout_gravity="center_horizontal" android:textSize="50dp"
-            android:layout_marginTop="35dp"/>
-        <RelativeLayout
+            android:layout_marginTop="20dp"/>
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp">
+            android:layout_marginTop="10dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="From: "
                 android:id="@+id/fromTextView" android:textSize="30dp" android:layout_marginLeft="90dp"/>
-        <TextView
+        <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:text="12:14"-->
+                <!--android:background="@drawable/shape"-->
+                <!--android:textColor="@color/accent"-->
+                <!--android:layout_toRightOf="@id/fromTextView"-->
+                <!--android:id="@+id/fromTimeTextView" android:layout_marginLeft="10dp" android:textSize="30dp"/>-->
+            <com.rey.material.widget.Button
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="12:14"
-                android:background="@drawable/shape"
-                android:textColor="@color/accent"
                 android:layout_toRightOf="@id/fromTextView"
-                android:id="@+id/fromTimeTextView" android:layout_marginLeft="10dp" android:textSize="30dp"/>
-        </RelativeLayout>
+                android:id="@+id/fromTimeTextView"
+                android:text="12:14"
+                android:textSize="40sp"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                />
+        </LinearLayout>
 
         <com.rey.material.widget.Slider
                 android:id="@+id/sliderFrom"
@@ -46,7 +56,7 @@
                 app:sl_secondaryColor="?attr/colorPrimary" android:layout_gravity="center_horizontal"
                 />
 
-        <RelativeLayout
+        <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -57,18 +67,28 @@
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:text="To: "
                 android:id="@+id/toTextView" android:textSize="30dp" android:layout_marginLeft="110dp"/>
-        <TextView
+        <!--<TextView-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:textAppearance="?android:attr/textAppearanceMedium"-->
+                <!--android:text="15:00"-->
+                <!--android:background="@drawable/shape"-->
+                <!--android:textColor="@color/accent"-->
+                <!--android:id="@+id/toTimeTextView"-->
+                <!--android:textSize="30dp"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:layout_toRightOf="@id/toTextView"/>-->
+            <com.rey.material.widget.Button
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="15:00"
-                android:background="@drawable/shape"
-                android:textColor="@color/accent"
+                android:layout_toRightOf="@id/toTextView"
+                android:text="12:14"
+                android:textSize="40sp"
                 android:id="@+id/toTimeTextView"
-                android:textSize="30dp"
-                android:layout_marginLeft="10dp"
-                android:layout_toRightOf="@id/toTextView"/>
-        </RelativeLayout>
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                />
+        </LinearLayout>
 
         <com.rey.material.widget.Slider
                 android:id="@+id/sliderTo"
