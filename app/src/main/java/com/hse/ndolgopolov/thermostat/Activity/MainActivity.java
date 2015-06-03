@@ -300,7 +300,7 @@ public class MainActivity extends ActionBarActivity {
         schedule.post(new Runnable() {
             @Override
             public void run() {
-                schedule.setText("Schedule for" + Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)]);
+                schedule.setText("Schedule for " + Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)]);
             }
         });
         //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
