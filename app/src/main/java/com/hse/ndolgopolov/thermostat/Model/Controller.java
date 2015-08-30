@@ -21,6 +21,7 @@ public class Controller {
     public Controller() {
         weekSchedule = new WeekSchedule();
         fakeDate = Calendar.getInstance();
+        fakeDate.setFirstDayOfWeek(Calendar.SUNDAY);
         //mainActivity = activity;
     }
 

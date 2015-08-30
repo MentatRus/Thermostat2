@@ -25,14 +25,14 @@ public class WeekSchedule{
     }
 
     public boolean isHighTemperature(Calendar calendar) {
-        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK )%7;
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK ) - 1;
         //Log.i("Day_of_week", dayOfWeek+"");
         //Log.i("day of week includes time", String.valueOf(days[dayOfWeek].includesTime(calendar)));
         return days[dayOfWeek].includesTime(calendar);
     }
 
     void addInterval(int day, int h1, int m1, int h2, int m2) {
-        days[day].addInterval(h1, m1, h2, m2);
+        days[day%7].addInterval(h1, m1, h2, m2);
     }
 
     Set<DaySchedule> daysWithInterval(Interval interval) {
@@ -67,7 +67,7 @@ public class WeekSchedule{
 
     public void addInterval(Interval interval, Collection<Integer> daysToEdit) {
         for (Integer day : daysToEdit) {
-            days[day].addInterval(interval);
+            days[day%7].addInterval(interval);
         }
     }
 
@@ -80,16 +80,16 @@ public class WeekSchedule{
      */
     void editInterval(Interval interval, Interval newInterval, Collection<Integer> daysToEdit) {
         for (Integer day : daysToEdit) {
-            Interval oldInt = days[day].findInterval(interval);
-            days[day].intervals.remove(oldInt);//ВНИМАНИЕ, может не работать
-            days[day].intervals.add(new Interval(newInterval));
+            Interval oldInt = days[day%7].findInterval(interval);
+            days[day%7].intervals.remove(oldInt);//ВНИМАНИЕ, может не работать
+            days[day%7].intervals.add(new Interval(newInterval));
         }
     }
 
     void deleteInterval(Interval interval, Collection<Integer> daysToEdit) {
         for (Integer day : daysToEdit) {
-            Interval oldInt = days[day].findInterval(interval);
-            days[day].intervals.remove(oldInt);
+            Interval oldInt = days[day%7].findInterval(interval);
+            days[day%7].intervals.remove(oldInt);
         }
     }
 

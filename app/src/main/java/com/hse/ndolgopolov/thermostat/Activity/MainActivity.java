@@ -105,7 +105,7 @@ public class MainActivity extends ActionBarActivity {
 
         listView = (ListView) findViewById(R.id.todayScheduleListView);
         // TODO pass today's schedule
-        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK)%7];
+        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1];
         adapter = new DayAdapter(this, daySchedule);
         listView.setAdapter(adapter);
 
@@ -130,7 +130,7 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(thisActivity, DayActivity.class);
-                intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK) % 7);
+                intent.putExtra("day", controller.fakeDate.get(Calendar.DAY_OF_WEEK)  - 1);
                 startActivity(intent);
             }
         });
@@ -181,7 +181,7 @@ public class MainActivity extends ActionBarActivity {
                 while (c) {
                     try {
                         Thread.sleep(minuteLength);
-                        controller.fakeDate.add(Calendar.MINUTE, 10);
+                        controller.fakeDate.add(Calendar.MINUTE, 1);
 
                         controller.setDesiredTemperature();
                         controller.setCurrentTemperature();
@@ -247,7 +247,7 @@ public class MainActivity extends ActionBarActivity {
         fakeDate.post(new Runnable() {
             @Override
             public void run() {
-                String res= Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)] + ", ";
+                String res= Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1] + ", ";
                 String h = String.valueOf(controller.fakeDate.get(Calendar.HOUR_OF_DAY));
                 res += ((h.length() < 2 ? "0" + h : h) + ":");
                 String m = String.valueOf(controller.fakeDate.get(Calendar.MINUTE));
@@ -274,9 +274,9 @@ public class MainActivity extends ActionBarActivity {
         schedule.post(new Runnable() {
             @Override
             public void run() {
-                schedule.setText("Schedule for " + Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)]);
+                schedule.setText("Schedule for " + Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1]);
 
-                DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) % 7];
+                DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) - 1];
                 adapter = new DayAdapter(thisActivity, daySchedule);
                 listView.setAdapter(adapter);
             }
@@ -287,7 +287,7 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onPostResume() {
         super.onPostResume();
-        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) % 7];
+        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK)  - 1];
         adapter = new DayAdapter(this, daySchedule);
         listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();

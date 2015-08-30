@@ -5,6 +5,6 @@ package com.hse.ndolgopolov.thermostat.Model;
  */
 public class Globals {
     public static Controller controller = new Controller();
-    public static String[] weekDays = {"Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"};
+    public static String[] weekDays = {"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"};
 
 }
