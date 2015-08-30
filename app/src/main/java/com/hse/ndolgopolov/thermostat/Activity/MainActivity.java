@@ -165,19 +165,14 @@ public class MainActivity extends ActionBarActivity {
             public void onClick(View v) {
                 if (controller.isPermanentlyOverriden) {
                     v.setBackgroundResource(R.drawable.lock_open_outline);
-                    controller.isPermanentlyOverriden = false;
                 } else {
                     v.setBackgroundResource(R.drawable.lock_outline);
-                    controller.isPermanentlyOverriden = true;
                 }
 
+                controller.isPermanentlyOverriden = !controller.isPermanentlyOverriden;
             }
         });
-        //TEST!!!
-//        ArrayList<Integer> list = new ArrayList<>();
-//        list.add(6);
-//        controller.weekSchedule.addInterval(new Interval(2, 50, 3, 30),list);
-//        updateFromController();
+
         final int minuteLength = 60000 / controller.timeScale;
         new Thread(new Runnable() {
             @Override
@@ -186,19 +181,15 @@ public class MainActivity extends ActionBarActivity {
                 while (c) {
                     try {
                         Thread.sleep(minuteLength);
-                        controller.fakeDate.add(Calendar.MINUTE, 1);
+                        controller.fakeDate.add(Calendar.MINUTE, 10);
 
                         controller.setDesiredTemperature();
                         controller.setCurrentTemperature();
                         updateFromController();
-
-                        //Log.i("Update", "Called");
-
                     } catch (InterruptedException ex) {
                         c = false;//Убери, если будет вылетать
                     }
                 }
-
             }
         }).start();
     }
@@ -226,16 +217,6 @@ public class MainActivity extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
-//    public void clickPlus(View V){
-//        controller.desiredTemperature += 0.1;
-//        controller.isOverriden = true;
-//        updateFromController();
-//    }
-//    public void clickMinus(View V){
-//        controller.desiredTemperature -= 0.1;
-//        controller.isOverriden = true;
-//        updateFromController();
-//    }
 
     private TextView getActionBarTextView(Toolbar toolbar) {
         TextView titleTextView = null;
@@ -249,6 +230,7 @@ public class MainActivity extends ActionBarActivity {
 
         return titleTextView;
     }
+
     public void updateFromController(){
         currTemp.post(new Runnable() {
             @Override
@@ -262,21 +244,15 @@ public class MainActivity extends ActionBarActivity {
                 targetTemp.setText(String.format("%.1f", controller.desiredTemperature));
             }
         });
-        //targetTemp.setText(String.format("%.1f",controller.desiredTemperature));
-        //SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-        //fakeDate.setText(dateFormat.format(controller.fakeDate));
         fakeDate.post(new Runnable() {
             @Override
             public void run() {
-                //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));S
                 String res= Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)] + ", ";
                 String h = String.valueOf(controller.fakeDate.get(Calendar.HOUR_OF_DAY));
                 res += ((h.length() < 2 ? "0" + h : h) + ":");
                 String m = String.valueOf(controller.fakeDate.get(Calendar.MINUTE));
                 res += (m.length() < 2 ? "0" + m : m);
                 fakeDate.setText(res);
-
-
             }
         });
 
@@ -287,31 +263,33 @@ public class MainActivity extends ActionBarActivity {
                     imageViewTemperature.setBackgroundResource(Color.parseColor("#00000000"));
                     return;
                 }
-                if(controller.isDay){
+                if (controller.isDay) {
                     imageViewTemperature.setBackgroundResource(R.drawable.ic_day);
-
-                    return;
+                } else {
+                    imageViewTemperature.setBackgroundResource(R.drawable.ic_night);
                 }
-                imageViewTemperature.setBackgroundResource(R.drawable.ic_night);
-
-
             }
         });
+
         schedule.post(new Runnable() {
             @Override
             public void run() {
                 schedule.setText("Schedule for " + Globals.weekDays[controller.fakeDate.get(Calendar.DAY_OF_WEEK)]);
+
+                DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) % 7];
+                adapter = new DayAdapter(thisActivity, daySchedule);
+                listView.setAdapter(adapter);
             }
         });
-        //fakeDate.setText(controller.fakeDate.get(Calendar.HOUR_OF_DAY)+ ":"+controller.fakeDate.get(Calendar.MINUTE));
-
-        //Log.i("Update",controller.fakeDate.get(Calendar.HOUR_OF_DAY) + ":" + controller.fakeDate.get(Calendar.MINUTE));
 
     }
 
     @Override
     protected void onPostResume() {
         super.onPostResume();
+        DaySchedule daySchedule = controller.weekSchedule.days[controller.fakeDate.get(Calendar.DAY_OF_WEEK) % 7];
+        adapter = new DayAdapter(this, daySchedule);
+        listView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
     }
 }
