@@ -164,10 +164,10 @@ public class MainActivity extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 if (controller.isPermanentlyOverriden) {
-                    v.setBackgroundResource(R.drawable.ic_lock_open);
+                    v.setBackgroundResource(R.drawable.lock_open_outline);
                     controller.isPermanentlyOverriden = false;
                 } else {
-                    v.setBackgroundResource(R.drawable.ic_lock_closed);
+                    v.setBackgroundResource(R.drawable.lock_outline);
                     controller.isPermanentlyOverriden = true;
                 }
 

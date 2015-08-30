@@ -2,7 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 xmlns:drakeet="http://schemas.android.com/apk/res-auto"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+    >
 
     <include
             android:id="@+id/toolbar"
@@ -54,11 +55,11 @@
 
 
     <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:id="@+id/lockImageView"
             android:layout_below="@id/toolbar"
-            android:background="@drawable/ic_lock_open"
+            android:background="@drawable/lock_open_outline"
             android:layout_marginTop="130dp"
             android:layout_marginLeft="10dp"
             android:layout_alignParentEnd="true"/>
@@ -75,13 +76,13 @@
 
 
         <me.drakeet.library.UIButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
                 android:id="@+id/plusButton"
                 android:layout_above="@+id/targetTemperatureTextView"
                 drakeet:alpha_pressed="0"
                 drakeet:color_pressed="#F44336"
-                android:background="@drawable/ic_plus"
+                android:background="@drawable/plus"
                 drakeet:shape_type="round"
                 onClick="clickPlus"
                 />
@@ -97,13 +98,13 @@
             android:layout_alignParentRight="true"/>
 
         <me.drakeet.library.UIButton
-                android:layout_width="40dp"
-                android:layout_height="40dp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
             android:id="@+id/minusButton"
                 android:layout_alignBottom="@+id/currentTemperatureTextView"
                 drakeet:alpha_pressed="0"
                 drakeet:color_pressed="#660303ff"
-                android:background="@drawable/ic_minus"
+                android:background="@drawable/minus"
                 drakeet:shape_type="round"
             onClick="clickMinus"
             />

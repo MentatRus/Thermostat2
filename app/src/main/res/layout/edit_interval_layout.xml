@@ -11,12 +11,12 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Edit interval"
             android:id="@+id/titleTextView" android:layout_gravity="center_horizontal" android:textSize="50dp"
-            android:layout_marginTop="20dp"/>
+            android:layout_marginTop="5dp"/>
         <LinearLayout
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -39,7 +39,7 @@
                 android:layout_toRightOf="@id/fromTextView"
                 android:id="@+id/fromTimeTextView"
                 android:text="12:14"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 />
         </LinearLayout>
@@ -60,7 +60,7 @@
             android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
+            android:layout_marginTop="5dp">
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -84,7 +84,7 @@
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@id/toTextView"
                 android:text="12:14"
-                android:textSize="40sp"
+                android:textSize="30sp"
                 android:id="@+id/toTimeTextView"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 />
