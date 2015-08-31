@@ -17,12 +17,11 @@ public class Controller {
     public double currentTemperature = 22;
     public double temperatureChangeSpeed = 0.05;
     public Calendar fakeDate;
-    //MainActivity mainActivity;
+
     public Controller() {
         weekSchedule = new WeekSchedule();
         fakeDate = Calendar.getInstance();
         fakeDate.setFirstDayOfWeek(Calendar.SUNDAY);
-        //mainActivity = activity;
     }
 
     public void setDesiredTemperature() {
@@ -37,12 +36,12 @@ public class Controller {
             desiredTemperature = scheduleTemperature;
             return;
         }
+
         if (!isPermanentlyOverriden) {
-            if (weekSchedule.isHighTemperature(fakeDate) || fakeDate.get(Calendar.HOUR) == 0 && fakeDate.get(Calendar.MINUTE) == 0) {
+            if (isDay || (fakeDate.get(Calendar.HOUR) == 0 && fakeDate.get(Calendar.MINUTE) == 0)) {
                 desiredTemperature = scheduleTemperature;
                 isOverriden = false;
             }
-            return;
         }
     }
 
@@ -50,8 +49,4 @@ public class Controller {
         if (currentTemperature < desiredTemperature) currentTemperature += temperatureChangeSpeed;
         if (currentTemperature > desiredTemperature) currentTemperature -= temperatureChangeSpeed;
     }
-
-
-
-
 }

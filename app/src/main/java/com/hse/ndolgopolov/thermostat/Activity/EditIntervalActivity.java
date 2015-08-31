@@ -1,23 +1,21 @@
 package com.hse.ndolgopolov.thermostat.Activity;
 
 import android.app.Activity;
-
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.gc.materialdesign.views.ButtonFlat;
 import com.hse.ndolgopolov.thermostat.Adapter.WeekAdapterWithCheckbox;
 import com.hse.ndolgopolov.thermostat.Model.Globals;
+import com.hse.ndolgopolov.thermostat.Model.Interval;
 import com.hse.ndolgopolov.thermostat.R;
 import com.rey.material.widget.Slider;
 import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
 import com.wdullaer.materialdatetimepicker.time.TimePickerDialog;
 
-import java.util.Calendar;
-
+import java.util.ArrayList;
 import java.util.Calendar;
 
 /**
@@ -205,27 +203,48 @@ public class EditIntervalActivity extends Activity {
         //Log.i("Check", "3");
     }
 
-    public void clickAddInterval(View V){
-        WeekAdapterWithCheckbox adapterWithCheckbox = (WeekAdapterWithCheckbox)listView.getAdapter();
+    public void clickAddInterval(View V) {
+        WeekAdapterWithCheckbox adapterWithCheckbox = (WeekAdapterWithCheckbox) listView.getAdapter();
 
-        for (int i = 0; i < 7; i++){
-            if(newInterval){
-                if(adapterWithCheckbox.checkedDays[i]){
-                    Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute, endHour, endMinute);
-                    Log.i("Added to", i+"");
-                }
-
-            }
-            else {
-                if(adapterWithCheckbox.checkedDays[i]){
+        for (int i = 0; i < 7; i++) {
+            if (adapterWithCheckbox.checkedDays[i]) {
+                if (!newInterval) {
                     Globals.controller.weekSchedule.days[i].intervals.remove(interval);
-                    Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute, endHour, endMinute);
                 }
+
+                Globals.controller.weekSchedule.days[i].addInterval(beginHour, beginMinute, endHour, endMinute);
             }
+
+            checkForOverlaps(i);
         }
 
         finish();
     }
+
+    private void checkForOverlaps(int day) {
+        check(Globals.controller.weekSchedule.days[day].intervals);
+    }
+
+    private void check(ArrayList<Interval> arr) {
+        for (int i = 0; i < arr.size() - 1; i++) {
+            Interval interval1 = arr.get(i);
+            Interval interval2 = arr.get(i + 1);
+
+            if (arr.get(i).overlaps(arr.get(i + 1))) {
+                Interval newInterval = Interval.mergeIntervals(interval1, interval2);
+
+                arr.remove(interval1);
+                arr.remove(interval2);
+                arr.add(newInterval);
+
+                check(arr);
+                break;
+            }
+
+            break;
+        }
+    }
+
     public void clickDelete(View V){
         WeekAdapterWithCheckbox adapterWithCheckbox = (WeekAdapterWithCheckbox)listView.getAdapter();
         for (int i = 0; i < 7; i++) {

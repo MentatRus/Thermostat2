@@ -73,16 +73,6 @@ public class Interval implements Comparable<Interval> {
         int hour = calendar.get(Calendar.HOUR_OF_DAY);
         int minute = calendar.get(Calendar.MINUTE);
         int m3 = hour*60 + minute;
-//        Log.i("hour", hour+"");
-//        Log.i("minute", minute+"");
-//        Log.i("begin hour", begin.get(Calendar.HOUR_OF_DAY) + "");
-//        Log.i("end hour", end.get(Calendar.HOUR_OF_DAY) + "");
-//        Log.i("begin minute", begin.get(Calendar.MINUTE) + "");
-//        Log.i("end minute", begin.get(Calendar.MINUTE) + "");
-//        Log.i("Res", String.valueOf(begin.get(Calendar.HOUR_OF_DAY) <= hour && begin.get(Calendar.MINUTE) <= minute &&
-//                end.get(Calendar.HOUR_OF_DAY) >= hour && begin.get(Calendar.MINUTE) >= minute));
-//        return begin.get(Calendar.HOUR_OF_DAY) <= hour && begin.get(Calendar.MINUTE) <= minute &&
-//                end.get(Calendar.HOUR_OF_DAY) >= hour && begin.get(Calendar.MINUTE) >= minute;
         int m1 = begin.get(Calendar.HOUR_OF_DAY) * 60 + begin.get(Calendar.MINUTE);
         int m2 = end.get(Calendar.HOUR_OF_DAY) * 60 + end.get(Calendar.MINUTE);
         return m3>= m1 && m3 <= m2;
