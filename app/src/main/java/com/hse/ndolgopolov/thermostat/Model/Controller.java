@@ -38,7 +38,7 @@ public class Controller {
         }
 
         if (!isPermanentlyOverriden) {
-            if (isDay || (fakeDate.get(Calendar.HOUR) == 0 && fakeDate.get(Calendar.MINUTE) == 0)) {
+            if (weekSchedule.isIntervalBeginning(fakeDate) || (fakeDate.get(Calendar.HOUR) == 0 && fakeDate.get(Calendar.MINUTE) == 0)) {
                 desiredTemperature = scheduleTemperature;
                 isOverriden = false;
             }

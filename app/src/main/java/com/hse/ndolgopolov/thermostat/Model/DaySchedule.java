@@ -58,6 +58,13 @@ public class DaySchedule {
         return false;
     }
 
+    public boolean isIntervalBeginning(Calendar calendar){
+        for (Interval interval : intervals) {
+            if (interval.isIntervalBeginning(calendar)) return true;
+        }
+        return false;
+    }
+
     public boolean includesTime(Calendar calendar) {
         for (Interval interval : intervals) {
             if (interval.includesTime(calendar)) return true;

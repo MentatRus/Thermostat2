@@ -78,6 +78,16 @@ public class Interval implements Comparable<Interval> {
         return m3>= m1 && m3 <= m2;
     }
 
+    public boolean isIntervalBeginning(Calendar calendar){
+        int hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int minute = calendar.get(Calendar.MINUTE);
+
+        boolean isBegin = begin.get(Calendar.HOUR) == calendar.get(Calendar.HOUR) && begin.get(Calendar.MINUTE) == calendar.get(Calendar.MINUTE);
+        boolean isEnd = end.get(Calendar.HOUR) == calendar.get(Calendar.HOUR) && end.get(Calendar.MINUTE) == calendar.get(Calendar.MINUTE);
+
+        return isBegin || isEnd;
+    }
+
     public boolean overlaps(Interval interval){
         return interval.includesTime(begin) || interval.includesTime(end) || includesTime(interval.begin) || includesTime(interval.end);
     }

@@ -173,7 +173,7 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        final int minuteLength = 10000 / controller.timeScale;
+        final int minuteLength = 60000 / controller.timeScale;
         new Thread(new Runnable() {
             @Override
             public void run() {

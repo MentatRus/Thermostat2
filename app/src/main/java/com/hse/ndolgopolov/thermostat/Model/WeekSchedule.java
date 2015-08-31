@@ -31,6 +31,11 @@ public class WeekSchedule{
         return days[dayOfWeek].includesTime(calendar);
     }
 
+    public boolean isIntervalBeginning(Calendar calendar){
+        int dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK ) - 1;
+        return days[dayOfWeek].isIntervalBeginning(calendar);
+    }
+
     void addInterval(int day, int h1, int m1, int h2, int m2) {
         days[day%7].addInterval(h1, m1, h2, m2);
     }
