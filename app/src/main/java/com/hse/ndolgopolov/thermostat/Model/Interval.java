@@ -87,4 +87,28 @@ public class Interval implements Comparable<Interval> {
         int m2 = end.get(Calendar.HOUR_OF_DAY) * 60 + end.get(Calendar.MINUTE);
         return m3>= m1 && m3 <= m2;
     }
+
+    public boolean overlaps(Interval interval){
+        return interval.includesTime(begin) || interval.includesTime(end) || includesTime(interval.begin) || includesTime(interval.end);
+    }
+
+    public static Interval mergeIntervals(Interval i1, Interval i2){
+        if(!i1.overlaps(i2)) return null;
+        Calendar begin = null;
+        Calendar end = null;
+        if( i1.begin.compareTo(i2.begin) == -1){
+            begin = i1.begin;
+        }
+        else {
+            begin = i2.begin;
+        }
+
+        if( i1.end.compareTo(i2.end) == 1){
+            end = i1.end;
+        }
+        else {
+            end = i2.end;
+        }
+        return new Interval(begin.get(Calendar.HOUR_OF_DAY), begin.get(Calendar.MINUTE),end.get(Calendar.HOUR_OF_DAY), end.get(Calendar.MINUTE));
+    }
 }
