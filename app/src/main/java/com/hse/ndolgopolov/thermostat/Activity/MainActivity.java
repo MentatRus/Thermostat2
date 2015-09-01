@@ -170,6 +170,8 @@ public class MainActivity extends ActionBarActivity {
                 }
 
                 controller.isPermanentlyOverriden = !controller.isPermanentlyOverriden;
+                if(controller.isPermanentlyOverriden) controller.isOverriden = true;
+
             }
         });
 

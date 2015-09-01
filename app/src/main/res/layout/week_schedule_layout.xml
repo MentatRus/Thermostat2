@@ -80,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="23.1"
-            android:textSize="40sp"
+            android:textSize="35sp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
 
@@ -113,7 +113,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="23.1"
-            android:textSize="40sp"
+            android:textSize="35sp"
+
             android:textAppearance="?android:attr/textAppearanceMedium"
             />
     </LinearLayout>

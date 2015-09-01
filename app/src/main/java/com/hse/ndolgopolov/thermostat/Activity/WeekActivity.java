@@ -51,6 +51,8 @@ public class WeekActivity extends ActionBarActivity {
             }
         });
 
+        updateFromController();
+
     }
 
     private void showDayActivity(int day) {
@@ -158,6 +160,8 @@ public class WeekActivity extends ActionBarActivity {
         listView = (ListView) findViewById(R.id.weekListView);
         WeekAdapter adapter = new WeekAdapter(this);
         listView.setAdapter(adapter);
+        dayTemp = controller.weekSchedule.highTemperature;
+        nightTemp = controller.weekSchedule.lowTemperature;
     }
 
 
